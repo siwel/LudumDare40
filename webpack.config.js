@@ -1,6 +1,7 @@
 const path = require('path');
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const webpack = require('webpack');
+const CopyWebpackPlugin = require('copy-webpack-plugin');
 
 const phaserModule = path.join(__dirname, '/node_modules/phaser-ce/');
 const phaser = path.join(phaserModule, 'build/custom/phaser-split.js');
@@ -46,7 +47,11 @@ module.exports = {
 		new webpack.DefinePlugin({ __DEV__: JSON.stringify(__DEV__) }),
 		new HtmlWebpackPlugin({
 			template: './src/index.html'
-		})
+		}),
+        new CopyWebpackPlugin([
+                {
+                    from: 'assets'
+                }])
 	],
 	resolve: {
 		alias: {
