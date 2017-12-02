@@ -6,54 +6,42 @@ const TREES = {
 	// TODO list of trees available
 }
 
-const GameStateManager = (function() {
-	let gameState;
-
-	function init() {
-		// Set up initial game state
-		gameState = {
-			trees: [],
-			population: 1,
-			CO2Level: 0,
-			CO2IncreasePerTick: 0,
-			CO2DecreasePerTick: 0,
-			money: 0,
-			moneyPerTick: 1, // TODO
-		};
+// Not technically a singleton but should only ever be called once per game
+export default class GameStateManager {
+	constructor() {
+		this.trees = [];
+		this.population = 1;
+		this.CO2Level = 0;
+		this.CO2IncreasePerTick = 0;
+		this.CO2DecreasePerTick = 0;
+		this.money = 0;
+		this.moneyPerTicket = 1;
 	}
 
-	function _onPurchase(cost, tree) {
-		gameState.money -= cost;
-		gameState.trees.push(tree);
+	_onPurchase(cost, tree) {
+		this.money -= cost;
+		this.trees.push(tree);
 	}
 
-	function _onPopulationIncrease() {
-		// TODO
+	// Diff can be + or -
+	_onPopulationChange(diff) {
+		this.population += diff;
 	}
 
-	function getBalance() {
-		// TODO
+	getBalance() {
+		return this.money;
 	}
 
-	function getCO2Level() {
-		// TODO
+	getCO2Level() {
+		return this.CO2Level
 	}
 
-	function tick() {
-		// TODO: Update stuff per tick
+	tick() {
+		this.money += this.moneyPerTick;
+		this.CO2Level += (this.CO2IncreasePerTick)
 	}
 
-	function handlePublisherUpdate(event) {
+	handlePublisherUpdate(event) {
 		// TODO add handlers
 	}
-
-
-	return {
-		getBalance,
-		getCO2Level,
-		init,
-		tick,
-	};
-})();
-
-export default GameStateManager;
+}
