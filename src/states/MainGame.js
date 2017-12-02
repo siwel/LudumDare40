@@ -1,3 +1,6 @@
+import GameStateManager from'../managers/GameStateManager'
+import PubSub from 'pubsub-js';
+import PubSubTopics from '../PubSubTopics';
 
 class MainGame extends Phaser.State {
 
@@ -5,6 +8,10 @@ class MainGame extends Phaser.State {
         super();
 
         this.selectionOrder = [];
+
+        this._gameStateManager = new GameStateManager();
+
+        PubSub.publish(PubSubTopics.PURCHASE, {image:"tree", age:10, value:10 });
     }
 
     create() {
@@ -19,7 +26,7 @@ class MainGame extends Phaser.State {
 
         let bgSounds = this.game.add.audio("bgSound");
         bgSounds.loop = true;
-        bgSounds.play()
+        bgSounds.play();
 
 
         //setup UI
@@ -44,7 +51,7 @@ class MainGame extends Phaser.State {
 
     endGame() {
         //this.game.state.start('gameover');
-        this.game.state.start('DrawSomething');
+        //this.game.state.start('DrawSomething');
     }
 
 }

@@ -1,5 +1,8 @@
 import PubSub from 'pubsub-js';
-import PubSubTopics from './PubSubTopics';
+//TODO need different pubsub
+//import PubSub from 'singleton-pubsub'
+import PubSubTopics from '../PubSubTopics';
+import Tree from './Tree';
 
 const GAME_CONSTANTS = {
 		maxC02: 100,
@@ -21,11 +24,13 @@ export default class GameStateManager {
 		this.moneyPerTick = 1;
 
 		this.subscribeToEvents();
+
+		console.log("GameStateManager")
 	}
 
 	_onPurchase(msg, data) {
 		this.money -= data.cost;
-		this.trees.push(data.tree);
+		this._createTree(data.tree,data.age);
 	}
 
 	// Diff can be + or -
@@ -37,13 +42,22 @@ export default class GameStateManager {
 		return this.money;
 	}
 
+	_createTree (data)
+	{
+		this.trees.push(new Tree(data.image,data.age,data.value));
+	}
+
 	getCO2Level() {
 		return this.CO2Level
 	}
 
 	tick() {
 		this.money += this.moneyPerTick;
-		this.CO2Level += (this.CO2IncreasePerTick - this.CO2DecreasePerTick)
+		this.CO2Level += (this.CO2IncreasePerTick - this.CO2DecreasePerTick);
+
+		this.trees.map((tree)=>{
+			tree.growTree();
+		})
 	}
 
 	subscribeToEvents() {

@@ -22,6 +22,7 @@
     "file-loader": "^1.1.5",
     "phaser-ce": "^2.9.2",
     "pubsub-js": "^1.5.7",
+    "singleton-pubsub": "^1.0.0",
     "url-loader": "^0.6.2"
   },
   "devDependencies": {
