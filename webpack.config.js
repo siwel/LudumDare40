@@ -23,7 +23,8 @@ module.exports = {
 	module: {
 		rules: [
 			{
-				test: /\.js$/, use: {
+				test: /\.js$/,
+				use: {
 					loader: 'babel-loader',
 					options: {
 						presets: [
@@ -31,12 +32,24 @@ module.exports = {
 								targets: {
 									browsers: ['last 2 versions']
 								}
-							}]
+							}], ['@babel/preset-react']
 						],
 						//plugins: ['transform-object-rest-spread'],
 						cacheDirectory: true
 					}
 				}, include: path.join(__dirname, 'src')
+			},
+			{
+				test: /\.css$/,
+				use: [
+					{ loader: 'style-loader' },
+					{
+						loader: 'css-loader',
+						options: {
+							modules: true
+						}
+					}
+				]
 			},
 			{ test: /pixi\.js/, use: ['expose-loader?PIXI'] },
 			{ test: /phaser-split\.js$/, use: ['expose-loader?Phaser'] },
