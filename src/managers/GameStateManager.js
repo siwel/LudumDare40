@@ -1,3 +1,5 @@
+import PubSub from 'pubsub-js';
+
 const GAME_CONSTANTS = {
 		maxC02: 100,
 	};
