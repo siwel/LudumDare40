@@ -38,16 +38,8 @@ class MainGame extends Phaser.State {
 
     }
 
-
-
-
-
-
-
-
-
     update() {
-
+        this.countdownText.setText( (this.endGameTimer.duration/1000).toFixed(0));
     }
 
     endGame() {
