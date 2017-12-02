@@ -20,7 +20,7 @@ export default class GameStateManager {
 		this.CO2Level = 0;
 		this.CO2IncreasePerTick = 0;
 		this.CO2DecreasePerTick = 0;
-		this.money = 0;
+		this.balance = 0;
 		this.moneyPerTick = 1;
 
 		this.subscribeToEvents();
@@ -28,8 +28,20 @@ export default class GameStateManager {
 		console.log("GameStateManager")
 	}
 
+	get stateData() {
+		return {
+			trees: this.trees,
+			population: this.population,
+			CO2Level: this.CO2Level,
+			CO2IncreasePerTick: this.CO2IncreasePerTick,
+			CO2DecreasePerTick: this.CO2DecreasePerTick,
+			balance: this.balance,
+			moneyPerTick: this.moneyPerTick,
+		};
+	}
+
 	_onPurchase(msg, data) {
-		this.money -= data.cost;
+		this.balance -= data.cost;
 		this._createTree(data.tree,data.age);
 	}
 
@@ -39,7 +51,7 @@ export default class GameStateManager {
 	}
 
 	getBalance() {
-		return this.money;
+		return this.balance;
 	}
 
 	_createTree (data)
@@ -49,15 +61,6 @@ export default class GameStateManager {
 
 	getCO2Level() {
 		return this.CO2Level
-	}
-
-	tick() {
-		this.money += this.moneyPerTick;
-		this.CO2Level += (this.CO2IncreasePerTick - this.CO2DecreasePerTick);
-
-		this.trees.map((tree)=>{
-			tree.growTree();
-		})
 	}
 
 	subscribeToEvents() {

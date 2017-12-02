@@ -16,7 +16,7 @@ export class Gui {
 		ReactDOM.render(
 			<Fragment>
 				<TopBar
-					co2={state.co2}
+					CO2Level={state.CO2Level}
 					population={state.population}
 					balance={state.balance}
 				/>
