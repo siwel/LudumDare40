@@ -25,9 +25,7 @@ class Preloader extends Phaser.State {
     }
 
     onLoadComplete() {
-
         this.game.state.start('MainGame');
-        //this.game.state.start('DrawSomething');
     }
 }
 

@@ -43,10 +43,8 @@ class MainGame extends Phaser.State {
     }
 
     endGame() {
-
-        this.game.state.start('gameover');
-
-
+        //this.game.state.start('gameover');
+        this.game.state.start('DrawSomething');
     }
 
 }
