@@ -15,7 +15,7 @@ export default class GameStateManager {
 		this.CO2IncreasePerTick = 0;
 		this.CO2DecreasePerTick = 0;
 		this.money = 0;
-		this.moneyPerTicket = 1;
+		this.moneyPerTick = 1;
 	}
 
 	_onPurchase(cost, tree) {
@@ -38,7 +38,7 @@ export default class GameStateManager {
 
 	tick() {
 		this.money += this.moneyPerTick;
-		this.CO2Level += (this.CO2IncreasePerTick)
+		this.CO2Level += (this.CO2IncreasePerTick - this.CO2DecreasePerTick)
 	}
 
 	handlePublisherUpdate(event) {
