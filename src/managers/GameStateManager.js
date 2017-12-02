@@ -1,4 +1,5 @@
 import PubSub from 'pubsub-js';
+import PubSubTopics from './PubSubTopics';
 
 const GAME_CONSTANTS = {
 		maxC02: 100,
@@ -18,16 +19,18 @@ export default class GameStateManager {
 		this.CO2DecreasePerTick = 0;
 		this.money = 0;
 		this.moneyPerTick = 1;
+
+		this.subscribeToEvents();
 	}
 
-	_onPurchase(cost, tree) {
-		this.money -= cost;
-		this.trees.push(tree);
+	_onPurchase(msg, data) {
+		this.money -= data.cost;
+		this.trees.push(data.tree);
 	}
 
 	// Diff can be + or -
-	_onPopulationChange(diff) {
-		this.population += diff;
+	_onPopulationChange(msg, data) {
+		this.population += data.diff;
 	}
 
 	getBalance() {
@@ -43,7 +46,8 @@ export default class GameStateManager {
 		this.CO2Level += (this.CO2IncreasePerTick - this.CO2DecreasePerTick)
 	}
 
-	handlePublisherUpdate(event) {
-		// TODO add handlers
+	subscribeToEvents() {
+		PubSub.subscribe(PubSubTopics.PURCHASE, this._onPurchase.bind(this));
+		PubSub.subscribe(PubSubTopics.POPULATION_CHANGE, this._onPopulationChange.bind(this));
 	}
 }

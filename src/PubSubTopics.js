@@ -1,8 +1,8 @@
 const PubSubTopics = {
-	BALANCE_CHANGE: 'Balance Change',
-	CO2_LEVEL_CHANGE: 'CO2 Level Change',
-	POPULATION_CHANGE: 'Population Change',
-	PURCHASE: 'Purchase',
+	BALANCE_CHANGE: 'Balance Change', // Data - diff: number
+	CO2_LEVEL_CHANGE: 'CO2 Level Change', // Data - diff: number
+	POPULATION_CHANGE: 'Population Change', // Data - diff: number
+	PURCHASE: 'Purchase', // Data - {cost: number, tree: Tree}
 };
 
 export default PubSubTopics;
