@@ -37,6 +37,9 @@ export default class GameStateManager {
 
     tick() {
         this.balance += this.moneyPerTick;
+
+        this.trees.map(tree => tree.growTree());
+        this.CO2IncreasePerTick = this.trees.reduce((total, tree) => total + tree.getO2(), 0);
         this.CO2Level += (this.CO2IncreasePerTick - this.CO2DecreasePerTick);
 
 
@@ -50,9 +53,7 @@ export default class GameStateManager {
         }
 
 
-        this.trees.map((tree) => {
-            tree.growTree();
-        })
+        
     }
 
 
@@ -65,8 +66,12 @@ export default class GameStateManager {
         }
 
         this.balance -= data.tree.saplingPrice;
-        this._createTree(data.tree);
-        PubSub.publish(PubSubTopics.PURCHASE_SUCCESS, data)
+        let tree = this._createTree(data.tree);
+        PubSub.publish(PubSubTopics.PURCHASE_SUCCESS, tree)
+    }
+
+    _onSellRequest(msg, data) {
+
     }
 
     // Diff can be + or -
@@ -79,7 +84,9 @@ export default class GameStateManager {
     }
 
     _createTree(data) {
-        this.trees.push(new Tree(data));
+        const tree = new Tree(data);
+        this.trees.push(tree);
+        return tree;
     }
 
     getCO2Level() {
