@@ -32,10 +32,10 @@ class MainGame extends Phaser.State {
 
 
         //setup UI
-        this.countdownText = this.add.text(this.game.world.centerX, 0, '', {
-            font: '40px Patua One', fill: '#ffffff', align: 'center'
-        });
-        this.countdownText.anchor.set(0.5,0);
+        //this.countdownText = this.add.text(this.game.world.centerX, 0, '', {
+        //    font: '40px Patua One', fill: '#ffffff', align: 'center'
+        //});
+        //this.countdownText.anchor.set(0.5,0);
 
 
 
@@ -50,7 +50,7 @@ class MainGame extends Phaser.State {
     update() {
         this._renderTrees();
 
-        this.countdownText.setText( (this.endGameTimer.duration/1000).toFixed(0));
+        //this.countdownText.setText( (this.endGameTimer.duration/1000).toFixed(0));
     }
 
     // This is for our gameplay ticks i.e. trees aging, CO2 changing
