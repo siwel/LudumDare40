@@ -37,6 +37,8 @@ let id = setInterval(() => {
 PubSub.subscribe(PubSubTopics.GAME_END, ()=>
 {
 	clearInterval(id);
+
+    gui.update({gameOver: true})
 });
 
 // Subscribe to all the things

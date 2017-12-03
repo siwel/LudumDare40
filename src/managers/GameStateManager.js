@@ -46,14 +46,10 @@ export default class GameStateManager {
         //TODO: take into account co2 selling trees etc
         this.population += this.trees.length;
 
-        if(this.CO2Level > 3)
+        if(this.CO2Level === 0)
         {
-            console.log(this.stateData);
             PubSub.publish(PubSubTopics.GAME_END, this)
         }
-
-
-        
     }
 
 

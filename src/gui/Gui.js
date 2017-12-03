@@ -4,6 +4,9 @@ import ReactDOM from 'react-dom';
 import {TopBar} from './components/topbar/TopBar';
 import {BottomBar} from './components/bottombar/BottomBar';
 
+import {GameOverUi} from './components/gameover/GameOverUi'
+
+
 import styles from './styles/gui.css';
 
 export class Gui {
@@ -23,8 +26,10 @@ export class Gui {
 				<BottomBar
 					title={state.title}
 				/>
+				<GameOverUi gameOver = {state.gameOver} ></GameOverUi>
 			</Fragment>,
 			this._el
 		);
 	}
+
 }
