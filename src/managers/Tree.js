@@ -1,3 +1,6 @@
+import PubSub from '../util/PubSubWrapper';
+import PubSubTopics from '../PubSubTopics';
+
 export default class Tree {
 
     constructor(treeData)
@@ -7,7 +10,7 @@ export default class Tree {
         this._age = 1;
         this._maxAge = treeData.maxAge;
         this._id = new Date().toISOString ();
-        this._life = false;
+        this._life = true;
         this._value = treeData.valueOverTime[0];
         this._valueOverTime = treeData.valueOverTime;
         this._o2 = treeData.o2OverTime[0];
@@ -34,7 +37,13 @@ export default class Tree {
 
     growTree()
     {
+        if(!this._life)
+        {
+            return;
+        }
         this._age++;
+
+        console.log("Tree Age:", this._age);
 
         this._remainLife = this._age * this._maxAge/100;
         this._checkAge();
@@ -58,6 +67,7 @@ export default class Tree {
     {
         if(this._age >= this._maxAge)
         {
+            PubSub.publish(PubSubTopics.TREE_IS_DEAD, this);
             this._life =false;
         }
     }

@@ -13,8 +13,8 @@ export default class GameStateManager {
         this.trees = [];
         this.population = 1;
         this.CO2Level = 0;
-        this.CO2IncreasePerTick = 1;
-        this.CO2DecreasePerTick = 0;
+        //this.CO2IncreasePerTick = 0;
+        this.CO2DecreasePerTick = 1;
         this.balance = 20;
         this.moneyPerTick = 1;
 
@@ -28,7 +28,7 @@ export default class GameStateManager {
             trees: this.trees,
             population: this.population,
             CO2Level: this.CO2Level,
-            CO2IncreasePerTick: this.CO2IncreasePerTick,
+            //CO2IncreasePerTick: this.CO2IncreasePerTick,
             CO2DecreasePerTick: this.CO2DecreasePerTick,
             balance: this.balance,
             moneyPerTick: this.moneyPerTick,
@@ -39,11 +39,15 @@ export default class GameStateManager {
         this.balance += this.moneyPerTick;
 
         this.trees.map(tree => tree.growTree());
+
         this.CO2IncreasePerTick = this.trees.reduce((total, tree) => total + tree.getO2(), 0);
+
         this.CO2Level += (this.CO2IncreasePerTick - this.CO2DecreasePerTick);
 
 
         //TODO: take into account co2 selling trees etc
+
+
         this.population += this.trees.length;
 
         if(this.CO2Level === this.MAXCO2LEVEL)
@@ -89,6 +93,12 @@ export default class GameStateManager {
         return this.CO2Level
     }
 
+    _removeTree(msg, data)
+    {
+        console.log(msg,data);
+        console.log("index",this.trees.indexOf(data));
+    }
+
 
 
     subscribeToEvents() {
@@ -96,6 +106,10 @@ export default class GameStateManager {
             this._onPurchaseRequest(topic, data)
         });
         PubSub.subscribe(PubSubTopics.POPULATION_CHANGE, this._onPopulationChange.bind(this));
+        PubSub.subscribe(PubSubTopics.TREE_IS_DEAD, (topic,data) =>
+        {
+            this._removeTree(topic,data)
+        } );
     }
 
     static get TREES() {
