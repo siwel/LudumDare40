@@ -57,10 +57,10 @@ class MainGame extends Phaser.State {
 
     _renderTrees() {
 
-        let trees = [...this.trees.values()];
-        for (let i = 0; i < trees.length; i++) {
-            this.game.add.sprite(50 * i, this.game.world.height * TOP_BAR_SIZE, trees[i].getAssetName());
-        }
+        //let trees = [...this.trees.values()];
+        //for (let i = 0; i < trees.length; i++) {
+        //    this.game.add.sprite(50 * i, this.game.world.height * TOP_BAR_SIZE, trees[i].getAssetName());
+        //}
     }
 
     /**
@@ -68,7 +68,7 @@ class MainGame extends Phaser.State {
      */
     addTree(tree) {
 
-        const xStart = 50 * this.trees.length;
+        const xStart = 50 * this.trees.size;
         const yStart = this.game.world.height * TOP_BAR_SIZE;
 
         const sprite = this.game.add.sprite(xStart, yStart, tree.getAssetName());
