@@ -36,6 +36,9 @@ export default class GameStateManager {
 
     tick() {
         this.balance += this.moneyPerTick;
+
+        this.trees.map(tree => tree.growTree());
+        this.CO2IncreasePerTick = this.trees.reduce((total, tree) => total + tree.getO2(), 0);
         this.CO2Level += (this.CO2IncreasePerTick - this.CO2DecreasePerTick);
 
 
@@ -43,9 +46,7 @@ export default class GameStateManager {
         this.population += this.trees.length;
 
 
-        this.trees.map((tree) => {
-            tree.growTree();
-        })
+        
     }
 
 
@@ -72,7 +73,11 @@ export default class GameStateManager {
     }
 
     _createTree(data) {
-        this.trees.push(new Tree(data));
+        const tree = new Tree(data);
+        this.trees.push(tree);
+
+        console.log(data);
+        console.log(tree);
     }
 
     getCO2Level() {

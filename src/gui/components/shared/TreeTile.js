@@ -30,9 +30,11 @@ export class TreeTile extends React.Component {
 
         for(let i = 0; i < valueData.length; i++)
         {
-            valueData[i]['Age'] = (tree.maxAge / valueData.length) * (i + 1);
+            valueData[i]['Age'] = Math.round(tree.maxAge / (valueData.length - 1)) * i; 
             valueData[i]['o2 Production'] = tree.o2OverTime[i];
         }
+
+        valueData[valueData.length - 1]['Age'] = tree.maxAge;
 
         return (
             <div className={styles.treeTile}>
