@@ -8,6 +8,7 @@ const PubSubTopics = {
 	SELL_SUCCESS: 'SellSuccess', // Data - {tree: Tree}
 	TICK: 'Tick', // No data
 	TREE_ADDED: 'TreeAdded', // Data - [{tree, xStart, xEnd, yStart, yEnd}]
+	GAME_END:'gameEnd', // TODO any data?????
 };
 
 export default PubSubTopics;

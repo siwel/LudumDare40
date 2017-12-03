@@ -4,7 +4,6 @@ import ReactDOM from 'react-dom';
 import {TopBar} from './components/topbar/TopBar';
 import {BottomBar} from './components/bottombar/BottomBar';
 import TreeDetails from './components/shared/TreeDetails';
-
 import styles from './styles/gui.css';
 
 export class Gui {
@@ -33,8 +32,10 @@ export class Gui {
 				<BottomBar
 					title={this.state.title}
 				/>
+
 			</Fragment>,
 			this._el
 		);
 	}
+
 }

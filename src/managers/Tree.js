@@ -96,11 +96,6 @@ export default class Tree {
         this._life = false;
     }
 
-    get id()
-    {
-        return this._id;
-    }
-
     getAssetName()
     {
         return this._assetName;
