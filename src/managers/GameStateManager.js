@@ -14,7 +14,7 @@ export default class GameStateManager {
         this.CO2Level = 0;
         this.CO2IncreasePerTick = 1;
         this.CO2DecreasePerTick = 0;
-        this.balance = 0;
+        this.balance = 20;
         this.moneyPerTick = 1;
 
         this.subscribeToEvents();
@@ -34,9 +34,32 @@ export default class GameStateManager {
         };
     }
 
-    _onPurchase(msg, data) {
+    tick() {
+        this.balance += this.moneyPerTick;
+        this.CO2Level += (this.CO2IncreasePerTick - this.CO2DecreasePerTick);
+
+
+        //TODO: take into account co2 selling trees etc
+        this.population += this.trees.length;
+
+
+        this.trees.map((tree) => {
+            tree.growTree();
+        })
+    }
+
+
+    _onPurchaseRequest(msg, data) {
+
+        if((this.balance - data.tree.saplingPrice) < 0)
+        {
+            alert('Not enough money for this sapling!');
+            return
+        }
+
         this.balance -= data.tree.saplingPrice;
         this._createTree(data.tree);
+        PubSub.publish(PubSubTopics.PURCHASE_SUCCESS, data)
     }
 
     // Diff can be + or -
@@ -56,18 +79,11 @@ export default class GameStateManager {
         return this.CO2Level
     }
 
-    tick() {
-        this.money += this.moneyPerTick;
-        this.CO2Level += (this.CO2IncreasePerTick - this.CO2DecreasePerTick);
 
-        this.trees.map((tree) => {
-            tree.growTree();
-        })
-    }
 
     subscribeToEvents() {
-        PubSub.subscribe(PubSubTopics.PURCHASE, (topic, data) => {
-            this._onPurchase(topic, data)
+        PubSub.subscribe(PubSubTopics.PURCHASE_REQUEST, (topic, data) => {
+            this._onPurchaseRequest(topic, data)
         });
         PubSub.subscribe(PubSubTopics.POPULATION_CHANGE, this._onPopulationChange.bind(this));
     }

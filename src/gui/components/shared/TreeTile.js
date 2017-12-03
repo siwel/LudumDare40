@@ -14,7 +14,7 @@ export class TreeTile extends React.Component {
 
     onBuy(tree) {
         console.log(`Attempting to buy ${tree.displayName}`);
-        PubSubWrapper.publish(PubSubTopics.PURCHASE, {tree: tree})
+        PubSubWrapper.publish(PubSubTopics.PURCHASE_REQUEST, {tree: tree})
     }
 
     render() {
@@ -39,7 +39,7 @@ export class TreeTile extends React.Component {
                 </LineChart>
 
 
-                <div onClick={() => this.onBuy(tree)}>{action}</div>
+                <div onClick={() => this.onBuy(tree)}>{`${action} for $${tree.saplingPrice}`}</div>
 
             </div>
         )

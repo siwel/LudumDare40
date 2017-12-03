@@ -1,14 +1,14 @@
 export default class Ticker {
-	constructor()
+
+    /**
+     * @param {GameStateManager} gameState
+     */
+	constructor(gameState)
 	{
-		// TODO
+		this._gameState = gameState;
 	}
 
-	tick(data) {
-		return Object.assign(data, {
-			balance: data.balance + data.moneyPerTick,
-			CO2Level: data.CO2Level + (data.CO2IncreasePerTick - data.CO2DecreasePerTick),
-			trees: data.trees.map(tree => tree.growTree()),
-		});
+	tick() {
+        this._gameState.tick();
 	}
 }

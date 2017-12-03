@@ -20,12 +20,12 @@ const gameState = new GameStateManager();
 let data = gameState.stateData;
 let time = 0;
 
-const ticker = new Ticker();
+const ticker = new Ticker(gameState);
 
 setInterval(() => {
 	time++;
-	data = ticker.tick(data);
-	gui.update(Object.assign(data, {
+	ticker.tick(data);
+	gui.update(Object.assign(gameState.stateData, {
 	 title: 'Title after ' + time + ' seconds',
 	}));
 }, 1000);
