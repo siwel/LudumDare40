@@ -42,7 +42,7 @@ export class TreeTile extends React.Component {
                 <LineChart width={400} height={100} data={valueData}>
                     <Tooltip/>
                     <Legend />
-                    <XAxis unit="Years" dataKey='Age' />
+                    <XAxis unit=" Days" dataKey='Age' />
                     <Line type='monotone' dataKey='Sale Value' stroke='#8884d8' strokeWidth={2}/>
                     <Line type='monotone' dataKey='o2 Production' stroke='#feaafe' strokeWidth={2}/>
                 </LineChart>

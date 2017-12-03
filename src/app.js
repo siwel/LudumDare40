@@ -25,7 +25,7 @@ const ticker = new Ticker(gameState);
 PubSub.subscribe(PubSubTopics.TICK, () => {
 	time++;
 	gui.update(Object.assign(gameState.stateData, {
-	 title: `Title after ${time} seconds`,
+	 title: `Day: ${time}`,
 	}));
 })
 
