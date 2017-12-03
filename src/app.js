@@ -1,6 +1,9 @@
 import {Game} from './Game';
 import {Gui} from './gui/Gui';
 
+import GameStateManager from './managers/GameStateManager';
+import Ticker from './managers/Ticker';
+
 import PubSub from 'pubsub-js';
 
 const game = new Game(document.getElementById('game'));
@@ -11,14 +14,19 @@ const gui = new Gui(document.getElementById('gui'), {
     title: 'Subtitle/Info'
 });
 
-setTimeout(() => {
-	gui.update({
-		co2: 20,
-		population: 60,
-		balance: 40,
-		title: 'Updated Title'
-	});
-}, 10000);
+const gameState = new GameStateManager();
+let data = gameState.stateData;
+let time = 0;
+
+const ticker = new Ticker();
+
+setInterval(() => {
+	time++;
+	data = ticker.tick(data);
+	gui.update(Object.assign(data, {
+	 title: 'Title after ' + time + ' seconds',
+	}));
+}, 1000);
 
 // create a function to subscribe to topics
 var mySubscriber = function( msg, data ){

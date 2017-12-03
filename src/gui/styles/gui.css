@@ -52,3 +52,28 @@
 	pointer-events: all;
 	font-size: 1em;
 }
+
+
+/*SHOP*/
+.shopWrapper{
+	position: fixed;
+	top: 0;
+	bottom: 0;
+	left: 0;
+	right: 0;
+	background-color: rgba(0,0,0,.5);
+	display: flex;
+	align-items: center;
+	justify-content: center;
+}
+
+.shopModal{
+	max-width: 90%;
+	max-height: 90%;
+	background-color: #fff;
+	border-radius: 5px;
+}
+
+.shopClose__btn{
+	pointer-events: all;
+}
