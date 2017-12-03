@@ -46,7 +46,7 @@ export default class GameStateManager {
         //TODO: take into account co2 selling trees etc
         this.population += this.trees.length;
 
-        if(this.CO2Level === 0)
+        if(this.CO2Level === this.MAXCO2LEVEL)
         {
             PubSub.publish(PubSubTopics.GAME_END, this)
         }

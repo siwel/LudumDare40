@@ -1,8 +1,6 @@
-import GameStateManager from'../managers/GameStateManager'
-import PubSub from '../util/PubSubWrapper';
-import PubSubTopics from '../PubSubTopics';
-
 // Top bar size: 6vh; Bottom bar size; 4vh
+import PubSubTopics from "../PubSubTopics";
+
 const TOP_BAR_SIZE = 0.06;
 const BOTTOM_BAR_SIZE = 0.04;
 
@@ -13,12 +11,13 @@ class MainGame extends Phaser.State {
 
         this.selectionOrder = [];
 
-        this.trees = [];
+        this.trees = new Map;
+        this.treeLocationMap = [];
     }
 
     create() {
         //add background image
-        this.background = this.game.add.sprite(0,0,'background');
+        this.background = this.game.add.sprite(0, 0, 'background');
         this.background.height = this.game.world.height;
         this.background.width = this.game.world.width;
 
@@ -38,19 +37,11 @@ class MainGame extends Phaser.State {
         //this.countdownText.anchor.set(0.5,0);
 
 
-
-
         //setup a timer to end the game
         this.endGameTimer = this.game.time.create();
-        this.endGameTimer.add(Phaser.Timer.SECOND * 30, this.endGame,this);
+        this.endGameTimer.add(Phaser.Timer.SECOND * 30, this.endGame, this);
         this.endGameTimer.start();
 
-    }
-
-    update() {
-        this._renderTrees();
-
-        //this.countdownText.setText( (this.endGameTimer.duration/1000).toFixed(0));
     }
 
     // This is for our gameplay ticks i.e. trees aging, CO2 changing
@@ -65,21 +56,50 @@ class MainGame extends Phaser.State {
     }
 
     _renderTrees() {
-        for (let i = 0; i < this.trees.length; i++) {
-            this.game.add.sprite(50 * i, this.game.world.height * TOP_BAR_SIZE, this.trees[i].getAssetName());
 
-            console.log(this.game)
-        }
+        //let trees = [...this.trees.values()];
+        //for (let i = 0; i < trees.length; i++) {
+        //    this.game.add.sprite(50 * i, this.game.world.height * TOP_BAR_SIZE, trees[i].getAssetName());
+        //}
     }
 
+    /**
+     * @param {Tree} tree
+     */
     addTree(tree) {
-        this.trees.push(tree);
+
+        const xStart = 50 * this.trees.size;
+        const yStart = this.game.world.height * TOP_BAR_SIZE;
+
+        const sprite = this.game.add.sprite(xStart, yStart, tree.getAssetName());
+
+        // #gamejam
+        const frame = sprite._frame;
+        const height = frame.height;
+        const width = frame.width;
+
+        this.treeLocationMap.push({
+            xStart,
+            xEnd: xStart + width,
+            yStart,
+            yEnd: yStart + height,
+        });
+
+        PubSub.publish(PubSubTopics.TREE_ADDED, this.treeLocationMap);
+
+        this.trees.set(tree.id, tree);
+        this._renderTrees();
     }
 
-    removeTree(tree)
-    {
-        const index = this.trees.indexOf(tree);
-        this.trees.splice(index, 1);
+    /**
+     * @param {Tree} tree
+     */
+    removeTree(tree) {
+        if (this.trees.has(tree.id)) {
+            this.trees.delete(id);
+        }
+        this._renderTrees();
+
     }
 }
 

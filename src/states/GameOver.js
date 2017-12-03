@@ -1,18 +1,29 @@
-import Phaser from 'phaser';
+
+import Button from '../util/Button'
 
 export default class GameOver extends Phaser.State {
     constructor(msg,data)
     {
       super();
 
-      console.log("Game Over:", msg, data);
       this._data = data;
-
     }
 
     create()
     {
-        this.gameEndInfo()
+        this.gameEndInfo();
+
+        let x = this.game.world.centerX - 82;
+        let y = this.game.world.centerY - 95;
+
+        this.leveItem = new Button(this.game,x +(82),y+(95),"levelButton" ,"", "Press F5 To Reload Game" ,()=>{
+            console.log("Game Over", this.game);
+
+
+        });
+
+        this.game.add.existing(this.leveItem);
+        this.leveItem.addValue();
     }
 
     gameEndInfo()
