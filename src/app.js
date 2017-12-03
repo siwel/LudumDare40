@@ -4,7 +4,9 @@ import {Gui} from './gui/Gui';
 import GameStateManager from './managers/GameStateManager';
 import Ticker from './managers/Ticker';
 
-import PubSub from 'pubsub-js';
+//import PubSub from 'pubsub-js';
+import PubSub from './util/PubSubWrapper';
+import PubSubTopics from './PubSubTopics';
 
 const game = new Game(document.getElementById('game'));
 const gui = new Gui(document.getElementById('gui'), {
@@ -27,6 +29,13 @@ setInterval(() => {
 	 title: 'Title after ' + time + ' seconds',
 	}));
 }, 1000);
+
+console.log(PubSub);
+
+// Subscribe to all the things
+for (let topic of Object.getOwnPropertyNames(PubSubTopics)) {
+	PubSub.subscribe(PubSubTopics[topic], game.onEvent.bind(game));
+}
 
 // create a function to subscribe to topics
 var mySubscriber = function( msg, data ){

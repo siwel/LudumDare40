@@ -19,6 +19,11 @@ class Preloader extends Phaser.State {
     loadResources() {
 
         this.game.load.image('background','image/blueBg.png');
+
+        // Some trees
+        this.game.load.image('ludumTree', 'image/ludumTree.png');
+        this.game.load.image('ludumTreeSapling', 'image/ludumTreeSapling.png');
+
         //this.game.load.spritesheet('target', 'target.png',128.66,128);
         this.game.load.audio('bgSound','sound/bensound-betterdays.mp3');
 

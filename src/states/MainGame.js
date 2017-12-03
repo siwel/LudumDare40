@@ -2,12 +2,18 @@ import GameStateManager from'../managers/GameStateManager'
 import PubSub from '../util/PubSubWrapper';
 import PubSubTopics from '../PubSubTopics';
 
+// Top bar size: 6vh; Bottom bar size; 4vh
+const TOP_BAR_SIZE = 0.06;
+const BOTTOM_BAR_SIZE = 0.04;
+
 class MainGame extends Phaser.State {
 
     constructor() {
         super();
 
         this.selectionOrder = [];
+
+        this.trees = [];
     }
 
     create() {
@@ -42,12 +48,24 @@ class MainGame extends Phaser.State {
     }
 
     update() {
+        this._renderTrees();
+
         this.countdownText.setText( (this.endGameTimer.duration/1000).toFixed(0));
     }
 
     endGame() {
         //this.game.state.start('gameover');
         //this.game.state.start('DrawSomething');
+    }
+
+    _renderTrees() {
+        for (let i = 0; i < this.trees.length; i++) {
+            this.game.add.sprite(50 * i, this.game.world.height * TOP_BAR_SIZE, 'ludumTreeSapling');
+        }
+    }
+
+    addTree(tree) {
+        this.trees.push(tree);
     }
 
 }
