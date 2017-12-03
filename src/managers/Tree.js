@@ -18,6 +18,10 @@ export default class Tree {
         console.log("Tree created.");
     }
 
+    get treeData() {
+        return this._treeData;
+    }
+
     _getAgeValues() 
     {
         const numDivisions = this._valueOverTime.length;

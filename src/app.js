@@ -13,7 +13,37 @@ const gui = new Gui(document.getElementById('gui'), {
     CO2Level: 10,
     population: 50,
     balance: 50,
-    title: 'Subtitle/Info'
+    title: 'Subtitle/Info',
+});
+
+// #gamejam
+let treeLocationsMap = [];
+PubSub.subscribe(PubSubTopics.TREE_ADDED, (msg, data) => {
+	console.log(msg, data);
+	treeLocationsMap = data;
+});
+
+let mousedOverTree = null;
+document.body.addEventListener('mousemove', event => {
+	for (let tree of treeLocationsMap) {
+		if (
+			event.clientX > tree.xStart && event.clientX < tree.xEnd &&
+			event.clientY > tree.yStart && event.clientY < tree.yEnd
+		) {
+			mousedOverTree = tree.tree;
+		}
+		else {
+			mousedOverTree = null;
+		}
+	}
+});
+
+//document.body.addEventListener('mousedown', event => {
+document.getElementById('game').addEventListener('click', event => {
+	console.log("Click");
+	//if (mousedOverTree) {
+		gui.update({tree: mousedOverTree});
+	//}
 });
 
 
@@ -26,32 +56,14 @@ PubSub.subscribe(PubSubTopics.TICK, () => {
 	time++;
 	gui.update(Object.assign(gameState.stateData, {
 	 title: `Day: ${time}`,
+	 //tree: mousedOverTree, // uncomment for hover functionality for details popup
 	}));
-})
+});
 
 setInterval(() => {
 	ticker.tick(data);
 	PubSub.publish(PubSubTopics.TICK);
 }, 1000);
-
-// #gamejam
-let treeLocationsMap = [];
-PubSub.subscribe(PubSubTopics.TREE_ADDED, (msg, data) => {
-	console.log(msg, data);
-	treeLocationsMap = data;
-
-});
-
-document.body.addEventListener('mousemove', event => {
-	for (let tree of treeLocationsMap) {
-		if (
-			event.clientX > tree.xStart && event.clientX < tree.xEnd &&
-			event.clientY > tree.yStart && event.clientY < tree.yEnd
-		) {
-			console.log("Found a tree!");
-		}
-	}
-});
 
 // Subscribe to all the things
 for (let topic of Object.getOwnPropertyNames(PubSubTopics)) {
