@@ -53,6 +53,12 @@ class MainGame extends Phaser.State {
         this.countdownText.setText( (this.endGameTimer.duration/1000).toFixed(0));
     }
 
+    // This is for our gameplay ticks i.e. trees aging, CO2 changing
+    // Not phaser's tick which happens way more often
+    gameplayTick() {
+        // TODO
+    }
+
     endGame() {
         //this.game.state.start('gameover');
         //this.game.state.start('DrawSomething');
@@ -60,7 +66,6 @@ class MainGame extends Phaser.State {
 
     _renderTrees() {
         for (let i = 0; i < this.trees.length; i++) {
-            console.log(this.trees[i]);
             this.game.add.sprite(50 * i, this.game.world.height * TOP_BAR_SIZE, this.trees[i].assetName);
         }
     }

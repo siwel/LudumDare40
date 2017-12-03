@@ -22,8 +22,14 @@ export class Game extends Phaser.Game {
 		this.state.start('Preloader');
 	}
 
+	// TODO add some sort of validation so that these don't break when we change states
+
 	_onPurchase(data) {
 		this.state.callbackContext.addTree(data.tree);
+	}
+
+	_onTick(data) {
+		this.state.callbackContext.gameplayTick();
 	}
 
 	onEvent(msg, data) {
@@ -40,6 +46,11 @@ export class Game extends Phaser.Game {
 				break;
 			case topics.PURCHASE_SUCCESS:
 				this._onPurchase(data);
+				break;
+			case topics.TICK:
+				this._onTick(data);
+				break;
+			default:
 				break;
 		}
 	}

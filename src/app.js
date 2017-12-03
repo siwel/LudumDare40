@@ -16,21 +16,23 @@ const gui = new Gui(document.getElementById('gui'), {
     title: 'Subtitle/Info'
 });
 
+
 const gameState = new GameStateManager();
 let data = gameState.stateData;
 let time = 0;
-
 const ticker = new Ticker(gameState);
 
-setInterval(() => {
+PubSub.subscribe(PubSubTopics.TICK, () => {
 	time++;
-	ticker.tick(data);
 	gui.update(Object.assign(gameState.stateData, {
-	 title: 'Title after ' + time + ' seconds',
+	 title: `Title after ${time} seconds`,
 	}));
-}, 1000);
+})
 
-console.log(PubSub);
+setInterval(() => {
+	ticker.tick(data);
+	PubSub.publish(PubSubTopics.TICK);
+}, 1000);
 
 // Subscribe to all the things
 for (let topic of Object.getOwnPropertyNames(PubSubTopics)) {
