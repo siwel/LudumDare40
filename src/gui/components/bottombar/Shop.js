@@ -38,17 +38,18 @@ export class Shop extends React.Component {
                 type={treeData}
             />);
 
-        const shopButton = <div className={styles.tree}>
+        const shopButton = <div className={styles.slotItem}>
             <button className={styles.tree__btn} onClick={this.onClick}>🕳</button>
         </div>;
 
         if (this.state.showingShow === true) {
             return (
-                <div className={styles.tree}>
+                <div className={styles.slotItem}>
                     <button className={styles.tree__btn} onClick={this.onClick}>🕳</button>
+
                     <div className={styles.shopWrapper}>
                         <div className={styles.shopModal}>
-
+                        
                             <div className={styles.shopHeader}>
                                 <h1>Sapling Shop</h1>
                                 <button className={styles.shopClose__btn} onClick={this.onClick}>Close</button>
@@ -68,6 +69,7 @@ export class Shop extends React.Component {
                             </div>
                         </div>
                     </div>
+
                 </div>);
         }
 

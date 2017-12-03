@@ -17,6 +17,7 @@ const gui = new Gui(document.getElementById('gui'), {
 });
 
 // #gamejam
+// Can probably remove this with the below, but maybe not yet in case we need it as it took ages
 let treeLocationsMap = [];
 PubSub.subscribe(PubSubTopics.TREE_ADDED, (msg, data) => {
 	console.log(msg, data);
@@ -38,7 +39,7 @@ document.body.addEventListener('mousemove', event => {
 	}
 });
 
-//document.body.addEventListener('mousedown', event => {
+// TODO we can probably remove this now that slots exist
 document.getElementById('game').addEventListener('click', event => {
 	console.log("Click");
 	//if (mousedOverTree) {

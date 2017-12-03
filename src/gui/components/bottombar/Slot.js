@@ -4,6 +4,7 @@ import styles from '../../styles/gui.css';
 import {Shop} from "./Shop";
 import PubSubWrapper from "../../../util/PubSubWrapper";
 import PubSubTopics from "../../../PubSubTopics";
+import TreeDetails from '../shared/TreeDetails';
 
 
 export default class extends React.Component {
@@ -22,10 +23,14 @@ export default class extends React.Component {
     _onPurchase(msg, data)
     {
         // debugger;
+        console.log(msg, data);
 
         if(data.getSlotNumber() === this.props.slotNumber)
         {
-            this.setState({occupied: true})
+            this.setState({
+                occupied: true,
+                tree: data,
+            });
         }
     }
 
@@ -48,9 +53,9 @@ export default class extends React.Component {
     }
 
     render() {
-        let {slotNumber} = this.props;
+        const {slotNumber} = this.props;
+        const {tree} = this.state;
 
-        //TODO: replace this tree button with cerden's tree detail
-        return this.state.occupied === true ? <button>🌳</button> : <Shop slotNumber={slotNumber}/>;
+        return this.state.occupied === true ? <TreeDetails tree={tree} slotNumber={slotNumber}/> : <Shop slotNumber={slotNumber}/>;
     }
 }

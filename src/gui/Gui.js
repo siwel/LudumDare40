@@ -26,9 +26,6 @@ export class Gui {
 					population={this.state.population}
 					balance={this.state.balance}
 				/>
-				<TreeDetails
-					tree={this.state.tree}
-				/>
 				<BottomBar
 					title={this.state.title}
 				/>

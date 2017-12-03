@@ -54,6 +54,11 @@ export default class GameStateManager {
 
         if(this.CO2Level === this.MAXCO2LEVEL)
         {
+            //TODO Start to kill population
+        }
+
+        if(this.population <= 0)
+        {
             PubSub.publish(PubSubTopics.GAME_END, this)
         }
     }
@@ -135,6 +140,13 @@ export default class GameStateManager {
                 o2OverTime: [7, 33, 48, 53],
                 saplingPrice: 10
             },
+        }
+    }
+
+    static get CONSTANTS() {
+        return {
+            SLOTS: 7,
+            ONE_DAY_DURATION: 1000
         }
     }
 }

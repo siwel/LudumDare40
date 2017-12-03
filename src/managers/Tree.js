@@ -118,6 +118,12 @@ export default class Tree {
         this._life = false;
     }
 
+
+    getMaxAge()
+    {
+        return this._treeData.maxAge;
+    }
+
     getAssetName()
     {
         return this._assetName;
