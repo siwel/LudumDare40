@@ -79,6 +79,7 @@ class MainGame extends Phaser.State {
         const width = frame.width;
 
         this.treeLocationMap.push({
+            tree,
             xStart,
             xEnd: xStart + width,
             yStart,

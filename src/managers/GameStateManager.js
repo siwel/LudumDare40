@@ -66,7 +66,10 @@ export default class GameStateManager {
         }
 
         this.balance -= data.tree.saplingPrice;
-        let tree = this._createTree(data.tree);
+
+        let tree = this._createTree(data.tree, data.slotNumber);
+
+
         PubSub.publish(PubSubTopics.PURCHASE_SUCCESS, tree)
     }
 
@@ -83,8 +86,8 @@ export default class GameStateManager {
         return this.balance;
     }
 
-    _createTree(data) {
-        const tree = new Tree(data);
+    _createTree(data, slot) {
+        const tree = new Tree(data, slot);
         this.trees.push(tree);
         return tree;
     }

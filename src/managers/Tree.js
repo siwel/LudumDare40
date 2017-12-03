@@ -3,8 +3,9 @@ import PubSubTopics from '../PubSubTopics';
 
 export default class Tree {
 
-    constructor(treeData)
+    constructor(treeData, slotNumber)
     {
+        this._slotNumber = slotNumber;
         this._treeData = treeData;
         this._assetName = treeData.assetName;
         this._age = 1;
@@ -19,6 +20,15 @@ export default class Tree {
         this._ageValues = this._getAgeValues();
 
         console.log("Tree created.");
+    }
+
+    get treeData() {
+        return this._treeData;
+    }
+
+    get id()
+    {
+        return this._id;
     }
 
     _getAgeValues() 
@@ -105,5 +115,10 @@ export default class Tree {
     getAssetName()
     {
         return this._assetName;
+    }
+
+    getSlotNumber()
+    {
+        return this._slotNumber;
     }
 }
