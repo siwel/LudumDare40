@@ -1,4 +1,6 @@
 // Top bar size: 6vh; Bottom bar size; 4vh
+import PubSubTopics from "../PubSubTopics";
+
 const TOP_BAR_SIZE = 0.06;
 const BOTTOM_BAR_SIZE = 0.04;
 
@@ -69,7 +71,7 @@ class MainGame extends Phaser.State {
         const xStart = 50 * this.trees.length;
         const yStart = this.game.world.height * TOP_BAR_SIZE;
 
-        const sprite = this.game.add.sprite(xStart, yStart, tree.assetName);
+        const sprite = this.game.add.sprite(xStart, yStart, tree.getAssetName());
 
         // #gamejam
         const frame = sprite._frame;
