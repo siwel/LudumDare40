@@ -10,11 +10,21 @@ import PubSubTopics from "../../../PubSubTopics";
  * The tree tile represents the state of a tree - it is used to both but and sell trees
  */
 export class TreeTile extends React.Component {
+    constructor(props) {
+        super(props);
+        this.onBuy = this.onBuy.bind(this);
+        this.onSell = this.onSell.bind(this);
+    }
 
 
-    onBuy(tree) {
-        console.log(`Attempting to buy ${tree.displayName} for slot ${this.props.slotNumber}`);
-        PubSubWrapper.publish(PubSubTopics.PURCHASE_REQUEST, {tree: tree, slotNumber: this.props.slotNumber})
+    onBuy() {
+        console.log(`Attempting to buy ${this.props.type.displayName} for slot ${this.props.slotNumber}`);
+        PubSubWrapper.publish(PubSubTopics.PURCHASE_REQUEST, {tree: this.props.type, slotNumber: this.props.slotNumber});
+    }
+
+    onSell() {
+        console.log(`Selling ${this.props.type.displayName} in slot ${this.props.slotNumber}`);
+        PubSubWrapper.publish(PubSubTopics.SELL_REQUEST, {tree: this.props.type, slotNumber: this.props.slotNumber});
     }
 
     shouldComponentUpdate(nextProps)
@@ -28,10 +38,10 @@ export class TreeTile extends React.Component {
     }
 
     render() {
+        const {buyMode, type} = this.props;
 
-
-        const action = this.props.buyMode === true ? 'Plant' : 'SELL';
-        const tree = this.props.type;
+        const action = buyMode === true ? 'Plant' : 'Sell';
+        const tree = type;
 
 
         const valueData = tree.valueOverTime.map(value => ({'Sale Value': value}));
@@ -45,6 +55,8 @@ export class TreeTile extends React.Component {
         }
 
         valueData[valueData.length - 1]['Age'] = tree.maxAge;
+
+        const onClick = buyMode === true ? this.onBuy : this.onSell;
 
         return (
             <div className={styles.treeTile}>
@@ -60,7 +72,7 @@ export class TreeTile extends React.Component {
                 </LineChart>
 
 
-                <div onClick={() => this.onBuy(tree)}>{`${action} for $${tree.saplingPrice}`}</div>
+                <div onClick={onClick}>{`${action} for $${tree.saplingPrice}`}</div>
 
             </div>
         )

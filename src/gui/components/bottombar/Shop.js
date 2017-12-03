@@ -46,9 +46,10 @@ export class Shop extends React.Component {
             return (
                 <div className={styles.tree}>
                     <button className={styles.tree__btn} onClick={this.onClick}>🕳</button>
+
                     <div className={styles.shopWrapper}>
                         <div className={styles.shopModal}>
-
+                        
                             <div className={styles.shopHeader}>
                                 <h1>Sapling Shop</h1>
                                 <button className={styles.shopClose__btn} onClick={this.onClick}>Close</button>
@@ -68,6 +69,7 @@ export class Shop extends React.Component {
                             </div>
                         </div>
                     </div>
+
                 </div>);
         }
 
