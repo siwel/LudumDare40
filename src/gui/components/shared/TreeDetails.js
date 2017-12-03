@@ -15,21 +15,14 @@ export default class TreeDetails extends React.Component {
 	//	PubSubWrapper.publish(PubSubTopics.PURCHASE_REQUEST, {tree: tree})
 	//}
 
-	shouldComponentUpdate(nextProps, nextState) {
-		if (nextProps.tree === undefined) {
-			return false;
-		}
-		return true;
-	}
-
 	_onClick() {
+		// TODO probably remove
 		console.log("AAAAA");
 	}
 
 	render() {
 		const {tree} = this.props;
-		console.log("Rendering TreeDetails", tree);
-		if (tree) console.log(tree.id);
+		if (tree) console.log("ID", tree.id);
 
 		if (!tree) return null;
 

@@ -22,6 +22,11 @@ export default class Tree {
         return this._treeData;
     }
 
+    get id()
+    {
+        return this._id;
+    }
+
     _getAgeValues() 
     {
         const numDivisions = this._valueOverTime.length;
