@@ -51,6 +51,6 @@ export default class extends React.Component {
         let {slotNumber} = this.props;
 
         //TODO: replace this tree button with cerden's tree detail
-        return this.state.occupied === true ? <button>🌳</button> : <Shop slotNumber={slotNumber}/>;
+        return this.state.occupied === true ? <button className={styles.slotItem}>🌳</button> : <Shop slotNumber={slotNumber}/>;
     }
 }

@@ -1,5 +1,6 @@
 // Top bar size: 6vh; Bottom bar size; 4vh
 import PubSubTopics from "../PubSubTopics";
+import GameStateManager from "../managers/GameStateManager";
 
 const TOP_BAR_SIZE = 0.06;
 const BOTTOM_BAR_SIZE = 0.04;
@@ -68,10 +69,16 @@ class MainGame extends Phaser.State {
      */
     addTree(tree) {
 
-        const xStart = 50 * this.trees.size;
-        const yStart = this.game.world.height * TOP_BAR_SIZE;
+
+
+        const slotWidth = this.game.width / GameStateManager.CONSTANTS.SLOTS;
+
+        const xStart = slotWidth * tree.getSlotNumber() + (slotWidth/2);
+        const yStart = this.game.world.height + BOTTOM_BAR_SIZE;
 
         const sprite = this.game.add.sprite(xStart, yStart, tree.getAssetName());
+
+        sprite.anchor.set(0.5, 1);
 
         // #gamejam
         const frame = sprite._frame;
