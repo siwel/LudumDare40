@@ -130,7 +130,8 @@ export default class GameStateManager {
 
     static get CONSTANTS() {
         return {
-            SLOTS: 7
+            SLOTS: 7,
+            ONE_DAY_DURATION: 1000
         }
     }
 }

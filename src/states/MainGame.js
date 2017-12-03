@@ -1,6 +1,7 @@
 // Top bar size: 6vh; Bottom bar size; 4vh
 import PubSubTopics from "../PubSubTopics";
 import GameStateManager from "../managers/GameStateManager";
+import * as Phaser from "phaser-ce";
 
 const TOP_BAR_SIZE = 0.06;
 const BOTTOM_BAR_SIZE = 0.04;
@@ -71,6 +72,9 @@ class MainGame extends Phaser.State {
 
 
 
+
+
+
         const slotWidth = this.game.width / GameStateManager.CONSTANTS.SLOTS;
 
         const xStart = slotWidth * tree.getSlotNumber() + (slotWidth/2);
@@ -79,6 +83,11 @@ class MainGame extends Phaser.State {
         const sprite = this.game.add.sprite(xStart, yStart, tree.getAssetName());
 
         sprite.anchor.set(0.5, 1);
+
+
+        //TODO: might need to change this more to a scale tween when we have actual assets
+        const duration = GameStateManager.CONSTANTS.ONE_DAY_DURATION * tree.getMaxAge();
+        this.game.add.tween(sprite).from( { y: this.game.world.height + sprite.height}, duration, Phaser.Easing.Bounce.Linear, true);
 
         // #gamejam
         const frame = sprite._frame;
