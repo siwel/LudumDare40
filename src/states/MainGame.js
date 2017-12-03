@@ -8,10 +8,6 @@ class MainGame extends Phaser.State {
         super();
 
         this.selectionOrder = [];
-
-        this._gameStateManager = new GameStateManager();
-
-        PubSub.publish(PubSubTopics.PURCHASE, {image:"tree", age:10, value:10 , cost:1});
     }
 
     create() {

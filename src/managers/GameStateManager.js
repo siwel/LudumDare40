@@ -24,6 +24,7 @@ export default class GameStateManager {
 		this.subscribeToEvents();
 
 		console.log("GameStateManager")
+        PubSub.publish(PubSubTopics.PURCHASE, {image:"tree", age:10, value:10 , cost:1});
 	}
 
 	get stateData() {
@@ -72,7 +73,7 @@ export default class GameStateManager {
 
 	subscribeToEvents() {
 		PubSub.subscribe(PubSubTopics.PURCHASE, (topic,data)=>{
-			this._onPurchase(data)
+			this._onPurchase(topic,data)
 		});
 		PubSub.subscribe(PubSubTopics.POPULATION_CHANGE, this._onPopulationChange.bind(this));
 	}

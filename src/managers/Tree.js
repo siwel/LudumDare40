@@ -9,7 +9,7 @@ export default class Tree {
         this._life = false;
         this._value = value?value:1;
 
-        console.log("tree");
+        console.log("Tree created.");
     }
 
     growTree()
