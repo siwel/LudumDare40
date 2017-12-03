@@ -38,13 +38,13 @@ export class Shop extends React.Component {
                 type={treeData}
             />);
 
-        const shopButton = <div className={styles.tree}>
+        const shopButton = <div className={styles.slotItem}>
             <button className={styles.tree__btn} onClick={this.onClick}>🕳</button>
         </div>;
 
         if (this.state.showingShow === true) {
             return (
-                <div className={styles.tree}>
+                <div className={styles.slotItem}>
                     <button className={styles.tree__btn} onClick={this.onClick}>🕳</button>
 
                     <div className={styles.shopWrapper}>

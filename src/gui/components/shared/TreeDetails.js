@@ -52,7 +52,7 @@ export default class TreeDetails extends React.Component {
 		);
 
 		const button = (
-			<div className={styles.tree}>
+			<div className={styles.slotItem}>
 				<button className={styles.tree__btn} onClick={this._onClick}>🌳</button>
 				{this.state.showingPopup && popup}
 			</div>
