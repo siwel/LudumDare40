@@ -20,7 +20,6 @@ export default class GameStateManager {
         this.subscribeToEvents();
 
         console.log("GameStateManager")
-        PubSub.publish(PubSubTopics.PURCHASE, {image: "tree", age: 10, value: 10, cost: 1});
     }
 
     get stateData() {
@@ -36,8 +35,8 @@ export default class GameStateManager {
     }
 
     _onPurchase(msg, data) {
-        this.balance -= data.cost;
-        this._createTree(data);
+        this.balance -= data.tree.saplingPrice;
+        this._createTree(data.tree);
     }
 
     // Diff can be + or -
@@ -50,7 +49,7 @@ export default class GameStateManager {
     }
 
     _createTree(data) {
-        this.trees.push(new Tree(data.image, data.age, data.value));
+        this.trees.push(new Tree(data));
     }
 
     getCO2Level() {
@@ -78,12 +77,16 @@ export default class GameStateManager {
         return {
             "LudumTree": {
                 displayName: "Ludum Tree",
+                assetName: "LudumTree.png",
+                maxAge: 300,
                 valueOverTime: [0, 3, 10, 2],
                 o2OverTime: [0, 300, 500, 0],
                 saplingPrice: 50
             },
             "Jamboo": {
                 displayName: "Jamboo",
+                maxAge: 60,
+                assetName: "JambooTree.png",
                 valueOverTime: [0, 8, 10, 1],
                 o2OverTime: [0, 100, 120, 0],
                 saplingPrice: 10

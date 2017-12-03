@@ -1,7 +1,9 @@
 import React from 'react';
-import {Line, LineChart} from 'recharts';
+import {Legend, Line, LineChart, Tooltip, XAxis} from 'recharts';
 
 import styles from '../../styles/gui.css';
+import PubSubWrapper from "../../../util/PubSubWrapper";
+import PubSubTopics from "../../../PubSubTopics";
 
 
 /**
@@ -12,6 +14,7 @@ export class TreeTile extends React.Component {
 
     onBuy(tree) {
         console.log(`Attempting to buy ${tree.displayName}`);
+        PubSubWrapper.publish(PubSubTopics.PURCHASE, {tree: tree})
     }
 
     render() {
@@ -21,7 +24,7 @@ export class TreeTile extends React.Component {
         const tree = this.props.type;
 
 
-        const valueData = tree.valueOverTime.map(value => ({'saleValue': value}));
+        const valueData = tree.valueOverTime.map(value => ({'Sale Value': value}));
 
 
         return (
@@ -30,8 +33,11 @@ export class TreeTile extends React.Component {
                 <h1>{tree.displayName}</h1>
 
                 <LineChart width={400} height={100} data={valueData}>
-                    <Line type='monotone' dataKey='saleValue' stroke='#8884d8' strokeWidth={2}/>
+                    <Tooltip/>
+                    <Legend />
+                    <Line type='monotone' dataKey='Sale Value' stroke='#8884d8' strokeWidth={2}/>
                 </LineChart>
+
 
                 <div onClick={() => this.onBuy(tree)}>{action}</div>
 

@@ -1,13 +1,14 @@
 export default class Tree {
 
-    constructor(assetName,maxAge,value)
+    constructor(treeData)
     {
-        this._assetName = assetName;
+        this._treeData = treeData;
+        this._assetName = treeData.assetName;
         this._age = 1;
-        this._maxAge = maxAge;
+        this._maxAge = treeData.maxAge;
         this._id = new Date().toISOString ();
         this._life = false;
-        this._value = value?value:1;
+        this._value = treeData.valueOverTime[0];
 
         console.log("Tree created.");
     }
