@@ -59,8 +59,12 @@ export default class GameStateManager {
         }
 
         this.balance -= data.tree.saplingPrice;
-        this._createTree(data.tree);
-        PubSub.publish(PubSubTopics.PURCHASE_SUCCESS, data)
+        let tree = this._createTree(data.tree);
+        PubSub.publish(PubSubTopics.PURCHASE_SUCCESS, tree)
+    }
+
+    _onSellRequest(msg, data) {
+
     }
 
     // Diff can be + or -
@@ -75,9 +79,7 @@ export default class GameStateManager {
     _createTree(data) {
         const tree = new Tree(data);
         this.trees.push(tree);
-
-        console.log(data);
-        console.log(tree);
+        return tree;
     }
 
     getCO2Level() {
