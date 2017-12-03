@@ -34,7 +34,7 @@ export default class GameStateManager {
         };
     }
 
-    _onPurchase(msg, data) {
+    _onPurchaseRequest(msg, data) {
 
         if((this.balance - data.tree.saplingPrice) < 0)
         {
@@ -44,6 +44,7 @@ export default class GameStateManager {
 
         this.balance -= data.tree.saplingPrice;
         this._createTree(data.tree);
+        PubSub.publish(PubSubTopics.PURCHASE_SUCCESS, data)
     }
 
     // Diff can be + or -
@@ -73,8 +74,8 @@ export default class GameStateManager {
     }
 
     subscribeToEvents() {
-        PubSub.subscribe(PubSubTopics.PURCHASE, (topic, data) => {
-            this._onPurchase(topic, data)
+        PubSub.subscribe(PubSubTopics.PURCHASE_REQUEST, (topic, data) => {
+            this._onPurchaseRequest(topic, data)
         });
         PubSub.subscribe(PubSubTopics.POPULATION_CHANGE, this._onPopulationChange.bind(this));
     }
