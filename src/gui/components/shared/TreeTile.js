@@ -13,8 +13,8 @@ export class TreeTile extends React.Component {
 
 
     onBuy(tree) {
-        console.log(`Attempting to buy ${tree.displayName}`);
-        PubSubWrapper.publish(PubSubTopics.PURCHASE_REQUEST, {tree: tree})
+        console.log(`Attempting to buy ${tree.displayName} for slot ${this.props.slotNumber}`);
+        PubSubWrapper.publish(PubSubTopics.PURCHASE_REQUEST, {tree: tree, slotNumber: this.props.slotNumber})
     }
 
     shouldComponentUpdate(nextProps)
@@ -30,7 +30,7 @@ export class TreeTile extends React.Component {
     render() {
 
 
-        const action = this.props.buyMode === true ? 'BUY' : 'SELL';
+        const action = this.props.buyMode === true ? 'Plant' : 'SELL';
         const tree = this.props.type;
 
 

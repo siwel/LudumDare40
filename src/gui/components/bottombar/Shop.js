@@ -39,13 +39,13 @@ export class Shop extends React.Component {
             />);
 
         const shopButton = <div className={styles.tree}>
-            <button className={styles.tree__btn} onClick={this.onClick}>🌳</button>
+            <button className={styles.tree__btn} onClick={this.onClick}>🕳</button>
         </div>;
 
         if (this.state.showingShow === true) {
             return (
                 <div className={styles.tree}>
-                    <button className={styles.tree__btn} onClick={this.onClick}>🌳</button>
+                    <button className={styles.tree__btn} onClick={this.onClick}>🕳</button>
                     <div className={styles.shopWrapper}>
                         <div className={styles.shopModal}>
 
@@ -63,6 +63,7 @@ export class Shop extends React.Component {
                                 <TreeTile
                                     type={this.state.selectedTree}
                                     buyMode
+                                    slotNumber={this.props.slotNumber}
                                 />
                             </div>
                         </div>

@@ -1,7 +1,8 @@
 export default class Tree {
 
-    constructor(treeData)
+    constructor(treeData, slotNumber)
     {
+        this._slotNumber = slotNumber;
         this._treeData = treeData;
         this._assetName = treeData.assetName;
         this._age = 1;
@@ -104,5 +105,10 @@ export default class Tree {
     getAssetName()
     {
         return this._assetName;
+    }
+
+    getSlotNumber()
+    {
+        return this._slotNumber;
     }
 }
