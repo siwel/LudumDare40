@@ -5,7 +5,7 @@ import PubSubWrapper from "../../../util/PubSubWrapper";
 import PubSubTopics from "../../../PubSubTopics";
 import {TreeTile} from './TreeTile';
 
-
+// TODO this should be in the bottombar folder really
 export default class TreeDetails extends React.Component {
 	// Proptypes
 	// tree: Tree
@@ -39,7 +39,7 @@ export default class TreeDetails extends React.Component {
 
 					<div className={styles.shopHeader}>
 						<h1>Sell Tree</h1>
-						<button className={styles.shopClose__btn} onClick={this.onClick}>Close</button>
+						<button className={styles.shopClose__btn} onClick={this._onClick}>Close</button>
 					</div>
 
 					<TreeTile
