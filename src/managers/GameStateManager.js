@@ -95,7 +95,7 @@ export default class GameStateManager {
                 displayName: "Ludum Tree",
                 assetName: "LudumTree",
                 maxAge: 300,
-                valueOverTime: [0, 3, 10, 2],
+                valueOverTime: [0, 150, 600, 20],
                 o2OverTime: [0, 300, 500, 0],
                 saplingPrice: 50
             },
@@ -103,7 +103,7 @@ export default class GameStateManager {
                 displayName: "Jamboo",
                 maxAge: 60,
                 assetName: "Jamboo",
-                valueOverTime: [0, 8, 10, 1],
+                valueOverTime: [0, 80, 60, 10],
                 o2OverTime: [0, 100, 120, 0],
                 saplingPrice: 10
             },
