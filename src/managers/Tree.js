@@ -45,6 +45,12 @@ export default class Tree {
         return divisions;
     }
 
+    _growTree()
+    {
+        this._age++;
+        this._mean = Math.floor(this._maxAge/2)
+    }
+
     growTree()
     {
         if(!this._life)
@@ -53,7 +59,7 @@ export default class Tree {
         }
         this._age++;
 
-        console.log("Tree Age:", this._age);
+        console.log("Tree Age:", this._value );
 
         this._remainLife = this._age * this._maxAge/100;
         this._checkAge();
@@ -70,7 +76,7 @@ export default class Tree {
        this._o2 = this._o2OverTime[ageIndex];
        this._value = this._valueOverTime[ageIndex];
 
-        return this;
+       return this;
     }
     
     _checkAge()
