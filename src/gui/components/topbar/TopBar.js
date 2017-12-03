@@ -8,9 +8,9 @@ import { Balance } from './Balance';
 
 export class TopBar extends React.Component {
 	render () {
-		const {co2, population, balance} = this.props;
+		const {CO2Level, population, balance} = this.props;
 		return <div className={styles.topBar}>
-			<CO2 value={co2} />
+			<CO2 value={CO2Level} />
 			<Population value={population} />
 			<Balance value={balance} />
 		</div>;
