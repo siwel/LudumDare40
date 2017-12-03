@@ -96,6 +96,7 @@
 /*Tree Tiles*/
 .treeTile{
 	border: solid black 2px;
+	padding: 5px;
 }
 
 .treeListItem{
