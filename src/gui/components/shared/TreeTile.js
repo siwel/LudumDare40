@@ -17,6 +17,16 @@ export class TreeTile extends React.Component {
         PubSubWrapper.publish(PubSubTopics.PURCHASE_REQUEST, {tree: tree})
     }
 
+    shouldComponentUpdate(nextProps)
+    {
+        if(nextProps.type.displayName === this.props.type.displayName)
+        {
+            return false;
+        }
+
+        return true;
+    }
+
     render() {
 
 
