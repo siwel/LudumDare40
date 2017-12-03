@@ -36,7 +36,9 @@ export class Game extends Phaser.Game {
 				break;
 			case topics.POPULATION_CHANGE:
 				break;
-			case topics.PURCHASE:
+			case topics.PURCHASE_REQUEST:
+				break;
+			case topics.PURCHASE_SUCCESS:
 				this._onPurchase(data);
 				break;
 		}
