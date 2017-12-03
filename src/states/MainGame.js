@@ -66,7 +66,9 @@ class MainGame extends Phaser.State {
 
     _renderTrees() {
         for (let i = 0; i < this.trees.length; i++) {
-            this.game.add.sprite(50 * i, this.game.world.height * TOP_BAR_SIZE, this.trees[i].assetName);
+            this.game.add.sprite(50 * i, this.game.world.height * TOP_BAR_SIZE, this.trees[i].getAssetName());
+
+            console.log(this.game)
         }
     }
 
@@ -74,6 +76,11 @@ class MainGame extends Phaser.State {
         this.trees.push(tree);
     }
 
+    removeTree(tree)
+    {
+        const index = this.trees.indexOf(tree);
+        this.trees.splice(index, 1);
+    }
 }
 
 export default MainGame;
