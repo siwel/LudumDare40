@@ -5,6 +5,7 @@ import Phaser from 'phaser';
 import DrawSomethingState from './states/DrawSomethingState';
 import Preloader from './states/Preloader'
 import MainGame from './states/MainGame'
+import GameOver from './states/GameOver'
 
 import topics from './PubSubTopics';
 
@@ -32,8 +33,14 @@ export class Game extends Phaser.Game {
 		this.state.callbackContext.gameplayTick();
 	}
 
+	_gameEnd(msg,data)
+    {
+        this.state.add('GameOver', new GameOver(msg,data));
+        this.state.start('GameOver');
+    }
+
 	onEvent(msg, data) {
-		console.log(`Event: ${msg}`);
+		console.log(`Event: ${msg} ${data}`);
 
 		switch (msg) {
 			case topics.BALANCE_CHANGE:
@@ -44,8 +51,11 @@ export class Game extends Phaser.Game {
 				break;
 			case topics.PURCHASE_REQUEST:
 				break;
+            case topics.GAME_END:
+                this._gameEnd(msg,data);
+                break;
 			case topics.PURCHASE_SUCCESS:
-				this._onPurchase(data);
+				this._onPurchase(data,msg);
 				break;
 			case topics.TICK:
 				this._onTick(data);

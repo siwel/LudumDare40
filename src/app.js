@@ -27,16 +27,23 @@ PubSub.subscribe(PubSubTopics.TICK, () => {
 	gui.update(Object.assign(gameState.stateData, {
 	 title: `Day: ${time}`,
 	}));
-})
+});
 
-setInterval(() => {
+let id = setInterval(() => {
 	ticker.tick(data);
 	PubSub.publish(PubSubTopics.TICK);
 }, 1000);
 
+PubSub.subscribe(PubSubTopics.GAME_END, ()=>
+{
+	clearInterval(id);
+});
+
 // Subscribe to all the things
 for (let topic of Object.getOwnPropertyNames(PubSubTopics)) {
-	PubSub.subscribe(PubSubTopics[topic], game.onEvent.bind(game));
+	PubSub.subscribe(PubSubTopics[topic], (msg, data)=>{
+		game.onEvent(msg,data)
+    });
 }
 
 // create a function to subscribe to topics

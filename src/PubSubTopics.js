@@ -5,6 +5,7 @@ const PubSubTopics = {
 	PURCHASE_REQUEST: 'PurchaseRequest', // Data - {tree: Tree}
 	PURCHASE_SUCCESS: 'PurchaseSuccess', // Data - {tree: Tree}
 	TICK: 'Tick', // No data
+	GAME_END:'gameEnd'
 };
 
 export default PubSubTopics;
