@@ -14,6 +14,8 @@ class MainGame extends Phaser.State {
         this.selectionOrder = [];
 
         this.trees = [];
+
+        this.treeLocationMap = [];
     }
 
     create() {
@@ -71,9 +73,27 @@ class MainGame extends Phaser.State {
     }
 
     addTree(tree) {
-        this.trees.push(tree);
-    }
+        const xStart = 50 * this.trees.length;
+        const yStart = this.game.world.height * TOP_BAR_SIZE;
 
+        const sprite = this.game.add.sprite(xStart, yStart, tree.assetName);
+
+        // #gamejam
+        const frame = sprite._frame;
+        const height = frame.height;
+        const width = frame.width;
+
+        this.treeLocationMap.push({
+            xStart,
+            xEnd: xStart + width,
+            yStart,
+            yEnd: yStart + height,
+        });
+
+        this.trees.push(tree);
+
+        PubSub.publish(PubSubTopics.TREE_ADDED, this.treeLocationMap);
+    }
 }
 
 export default MainGame;

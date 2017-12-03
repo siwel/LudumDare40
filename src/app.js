@@ -34,6 +34,25 @@ setInterval(() => {
 	PubSub.publish(PubSubTopics.TICK);
 }, 1000);
 
+// #gamejam
+let treeLocationsMap = [];
+PubSub.subscribe(PubSubTopics.TREE_ADDED, (msg, data) => {
+	console.log(msg, data);
+	treeLocationsMap = data;
+
+});
+
+document.body.addEventListener('mousemove', event => {
+	for (let tree of treeLocationsMap) {
+		if (
+			event.clientX > tree.xStart && event.clientX < tree.xEnd &&
+			event.clientY > tree.yStart && event.clientY < tree.yEnd
+		) {
+			console.log("Found a tree!");
+		}
+	}
+});
+
 // Subscribe to all the things
 for (let topic of Object.getOwnPropertyNames(PubSubTopics)) {
 	PubSub.subscribe(PubSubTopics[topic], game.onEvent.bind(game));

@@ -50,6 +50,8 @@ export class Game extends Phaser.Game {
 			case topics.TICK:
 				this._onTick(data);
 				break;
+			case topics.TREE_ADDED:
+				break;
 			default:
 				break;
 		}
