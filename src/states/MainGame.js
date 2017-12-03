@@ -60,7 +60,8 @@ class MainGame extends Phaser.State {
 
     _renderTrees() {
         for (let i = 0; i < this.trees.length; i++) {
-            this.game.add.sprite(50 * i, this.game.world.height * TOP_BAR_SIZE, 'ludumTreeSapling');
+            console.log(this.trees[i]);
+            this.game.add.sprite(50 * i, this.game.world.height * TOP_BAR_SIZE, this.trees[i].assetName);
         }
     }
 
