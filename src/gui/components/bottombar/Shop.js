@@ -29,6 +29,15 @@ export class Shop extends React.Component {
 
         //This is so hacky, but #gamejam - no time to refactor
 
+        const treeList = Object.values(GameStateManager.TREES).map(treeData =>
+            <TreeListItem
+                click={() => {
+                    this.onTreeItemClick(treeData)
+                }}
+                key={treeData.displayName}
+                type={treeData}
+            />);
+
         const shopButton = <div className={styles.tree}>
             <button className={styles.tree__btn} onClick={this.onClick}>🌳</button>
         </div>;
@@ -48,11 +57,7 @@ export class Shop extends React.Component {
                             <div className={styles.shopContent}>
 
                                 <div className={styles.storeTreeList}>
-                                    {Object.values(GameStateManager.TREES).map((treeData) => {
-                                        return <TreeListItem click={() => {
-                                            this.onTreeItemClick(treeData)
-                                        }} key={treeData.displayName} type={treeData} />
-                                    })}
+                                    {treeList}
                                 </div>
 
                                 <TreeTile
@@ -60,8 +65,6 @@ export class Shop extends React.Component {
                                     buyMode
                                 />
                             </div>
-
-
                         </div>
                     </div>
                 </div>);
