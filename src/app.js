@@ -8,7 +8,7 @@ import PubSub from 'pubsub-js';
 
 const game = new Game(document.getElementById('game'));
 const gui = new Gui(document.getElementById('gui'), {
-    co2: 10,
+    CO2Level: 10,
     population: 50,
     balance: 50,
     title: 'Subtitle/Info'

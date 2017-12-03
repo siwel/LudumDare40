@@ -18,7 +18,7 @@ export default class GameStateManager {
 		this.trees = [];
 		this.population = 1;
 		this.CO2Level = 0;
-		this.CO2IncreasePerTick = 0;
+		this.CO2IncreasePerTick = 1;
 		this.CO2DecreasePerTick = 0;
 		this.balance = 0;
 		this.moneyPerTick = 1;
@@ -42,7 +42,7 @@ export default class GameStateManager {
 
 	_onPurchase(msg, data) {
 		this.balance -= data.cost;
-		this._createTree(data.tree,data.age);
+		this._createTree(data);
 	}
 
 	// Diff can be + or -
@@ -56,7 +56,7 @@ export default class GameStateManager {
 
 	_createTree (data)
 	{
-		this.trees.push(new Tree(data.image,data.age,data.value));
+		this.trees.push(new Tree(data.image, data.age, data.value));
 	}
 
 	getCO2Level() {
