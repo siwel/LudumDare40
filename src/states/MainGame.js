@@ -86,6 +86,7 @@ class MainGame extends Phaser.State {
 
 
         //TODO: might need to change this more to a scale tween when we have actual assets
+        //TODO: would be nice here to use the growth graph as a easing function
         const duration = GameStateManager.CONSTANTS.ONE_DAY_DURATION * tree.getMaxAge();
         this.game.add.tween(sprite).from( { y: this.game.world.height + sprite.height}, duration, Phaser.Easing.Bounce.Linear, true);
 
