@@ -35,6 +35,13 @@ export default class GameStateManager {
     }
 
     _onPurchase(msg, data) {
+
+        if((this.balance - data.tree.saplingPrice) < 0)
+        {
+            alert('Not enough money for this sapling!');
+            return
+        }
+
         this.balance -= data.tree.saplingPrice;
         this._createTree(data.tree);
     }

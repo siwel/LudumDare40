@@ -39,7 +39,7 @@ export class TreeTile extends React.Component {
                 </LineChart>
 
 
-                <div onClick={() => this.onBuy(tree)}>{action}</div>
+                <div onClick={() => this.onBuy(tree)}>{`${action} for $${tree.saplingPrice}`}</div>
 
             </div>
         )
