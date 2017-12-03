@@ -19,7 +19,7 @@ class Preloader extends Phaser.State {
     loadResources() {
 
         this.game.load.image('background','image/desert_BG.png');
-        this.game.load.spritesheet('target', 'target.png',128.66,128);
+        //this.game.load.spritesheet('target', 'target.png',128.66,128);
         this.game.load.audio('bgSound','sound/bensound-betterdays.mp3');
 
     }

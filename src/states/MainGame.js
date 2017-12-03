@@ -1,5 +1,5 @@
 import GameStateManager from'../managers/GameStateManager'
-import PubSub from 'pubsub-js';
+import PubSub from '../util/PubSubWrapper';
 import PubSubTopics from '../PubSubTopics';
 
 class MainGame extends Phaser.State {
@@ -11,7 +11,7 @@ class MainGame extends Phaser.State {
 
         this._gameStateManager = new GameStateManager();
 
-        PubSub.publish(PubSubTopics.PURCHASE, {image:"tree", age:10, value:10 });
+        PubSub.publish(PubSubTopics.PURCHASE, {image:"tree", age:10, value:10 , cost:1});
     }
 
     create() {

@@ -1,6 +1,4 @@
-import PubSub from 'pubsub-js';
-//TODO need different pubsub
-//import PubSub from 'singleton-pubsub'
+import PubSub from '../util/PubSubWrapper';
 import PubSubTopics from '../PubSubTopics';
 import Tree from './Tree';
 
@@ -28,9 +26,9 @@ export default class GameStateManager {
 		console.log("GameStateManager")
 	}
 
-	_onPurchase(msg, data) {
+	_onPurchase(data) {
 		this.money -= data.cost;
-		this._createTree(data.tree,data.age);
+		this._createTree(data);
 	}
 
 	// Diff can be + or -
@@ -61,7 +59,9 @@ export default class GameStateManager {
 	}
 
 	subscribeToEvents() {
-		PubSub.subscribe(PubSubTopics.PURCHASE, this._onPurchase.bind(this));
+		PubSub.subscribe(PubSubTopics.PURCHASE, (topic,data)=>{
+			this._onPurchase(data)
+		});
 		PubSub.subscribe(PubSubTopics.POPULATION_CHANGE, this._onPopulationChange.bind(this));
 	}
 }
