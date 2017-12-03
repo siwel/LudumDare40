@@ -38,28 +38,6 @@ document.body.addEventListener('mousemove', event => {
 	}
 });
 
-const gameState = new GameStateManager();
-let data = gameState.stateData;
-let time = 0;
-const ticker = new Ticker(gameState);
-
-PubSub.subscribe(PubSubTopics.TICK, () => {
-	time++;
-	gui.update(Object.assign(gameState.stateData, {
-	 title: `Day: ${time}`,
-	}));
-});
-
-let id = setInterval(() => {
-	ticker.tick(data);
-	PubSub.publish(PubSubTopics.TICK);
-}, 1000);
-
-PubSub.subscribe(PubSubTopics.GAME_END, ()=>
-{
-	clearInterval(id);
-});
-
 //document.body.addEventListener('mousedown', event => {
 document.getElementById('game').addEventListener('click', event => {
 	console.log("Click");
@@ -67,7 +45,6 @@ document.getElementById('game').addEventListener('click', event => {
 		gui.update({tree: mousedOverTree});
 	//}
 });
-
 
 const gameState = new GameStateManager();
 let data = gameState.stateData;
@@ -82,10 +59,15 @@ PubSub.subscribe(PubSubTopics.TICK, () => {
 	}));
 });
 
-setInterval(() => {
+let id = setInterval(() => {
 	ticker.tick(data);
 	PubSub.publish(PubSubTopics.TICK);
 }, 1000);
+
+PubSub.subscribe(PubSubTopics.GAME_END, ()=>
+{
+	clearInterval(id);
+});
 
 // Subscribe to all the things
 for (let topic of Object.getOwnPropertyNames(PubSubTopics)) {
