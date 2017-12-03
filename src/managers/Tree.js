@@ -1,4 +1,4 @@
-export default class Tree{
+export default class Tree {
 
     constructor(assetName,maxAge,value)
     {
@@ -7,7 +7,7 @@ export default class Tree{
         this._maxAge = maxAge;
         this._id = new Date().toISOString ();
         this._life = false;
-        this._vaule = value?value:1;
+        this._value = value?value:1;
 
         console.log("tree");
     }
@@ -17,13 +17,15 @@ export default class Tree{
         this._age++;
 
         this._remainLife = this._age * this._maxAge/100;
-        Math.parseInt(this._remainLife) < 50? this._vaule++: this._vaule--;
+        parseInt(this._remainLife) < 50 ? this._value++: this._value--;
         this._checkAge();
+
+        return this;
     }
 
     getValue()
     {
-        return this._vaule;
+        return this._value;
     }
     _checkAge()
     {
