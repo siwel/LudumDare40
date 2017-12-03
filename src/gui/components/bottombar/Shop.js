@@ -1,6 +1,9 @@
 import React from 'react';
 
 import styles from '../../styles/gui.css';
+import {TreeTile} from "../shared/TreeTile";
+import GameStateManager from "../../../managers/GameStateManager";
+import {TreeListItem} from "../shared/TreeListItem";
 
 export class Shop extends React.Component {
 
@@ -9,12 +12,17 @@ export class Shop extends React.Component {
         this.onClick = this.onClick.bind(this);
 
         this.state = {
-            showingShow: false
+            showingShow: false,
+            selectedTree: GameStateManager.TREES.LudumTree
         }
     }
 
     onClick() {
         this.setState({showingShow: !this.state.showingShow})
+    }
+
+    onTreeItemClick(treeData) {
+        this.setState({selectedTree: treeData})
     }
 
     render() {
@@ -31,8 +39,29 @@ export class Shop extends React.Component {
                     <button className={styles.tree__btn} onClick={this.onClick}>🌳</button>
                     <div className={styles.shopWrapper}>
                         <div className={styles.shopModal}>
-                            <h1>Welcome to our awesome sapling shop</h1>
-                            <button className={styles.shopClose__btn} onClick={this.onClick}>Close</button>
+
+                            <div className={styles.shopHeader}>
+                                <h1>Sapling Shop</h1>
+                                <button className={styles.shopClose__btn} onClick={this.onClick}>Close</button>
+                            </div>
+
+                            <div className={styles.shopContent}>
+
+                                <div className={styles.storeTreeList}>
+                                    {Object.values(GameStateManager.TREES).map((treeData) => {
+                                        return <TreeListItem click={() => {
+                                            this.onTreeItemClick(treeData)
+                                        }} key={treeData.displayName} type={treeData} />
+                                    })}
+                                </div>
+
+                                <TreeTile
+                                    type={this.state.selectedTree}
+                                    buyMode
+                                />
+                            </div>
+
+
                         </div>
                     </div>
                 </div>);

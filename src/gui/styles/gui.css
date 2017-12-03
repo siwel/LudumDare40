@@ -74,6 +74,29 @@
 	border-radius: 5px;
 }
 
+.shopContent{
+	display: flex;
+	position: relative;
+}
+
+.shopHeader{
+	display: flex;
+}
+
 .shopClose__btn{
+	pointer-events: all;
+}
+
+.storeTreeList{
+
+}
+
+/*Tree Tiles*/
+.treeTile{
+	border: solid black 2px;
+}
+
+.treeListItem{
+	cursor: pointer;
 	pointer-events: all;
 }
