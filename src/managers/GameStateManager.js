@@ -131,7 +131,8 @@ export default class GameStateManager {
                 maxAge: 50,
                 valueOverTime: [0, 150, 600, 20],
                 o2OverTime: [0, 300, 500, 0],
-                saplingPrice: 50
+                saplingPrice: 50,
+                growthRate:1
             },
             "Jamboo": {
                 displayName: "Jamboo",
@@ -139,7 +140,8 @@ export default class GameStateManager {
                 assetName: "Jamboo",
                 valueOverTime: [0, 80, 60, 10],
                 o2OverTime: [7, 33, 48, 53],
-                saplingPrice: 10
+                saplingPrice: 10,
+                growthRate:1
             },
         }
     }

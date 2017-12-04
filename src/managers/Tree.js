@@ -17,6 +17,8 @@ export default class Tree {
         this._o2 = treeData.o2OverTime[0];
         this._o2OverTime = treeData.o2OverTime;
 
+        this._changeRate = treeData.growthRate;
+
         this._ageValues = this._getAgeValues();
 
         console.log("Tree created.");
@@ -47,8 +49,40 @@ export default class Tree {
 
     _growTree()
     {
-        this._age++;
-        this._mean = Math.floor(this._maxAge/2)
+        this._age += this._changeRate;
+        console.log("Tree Age: 11", this._age , this._changeRate);
+
+        this._currentAge = this._age *100/this._maxAge;
+
+        if(this._currentAge <= 25)
+        {
+            this._o2 = this._o2OverTime[0];
+            this._value = this._valueOverTime[0];
+
+        }
+        else if(this._currentAge >25 && this._currentAge <= 50)
+        {
+            this._o2 = this._o2OverTime[1];
+            this._value = this._valueOverTime[1];
+
+        }
+        else if(this._currentAge > 50 && this._currentAge <= 75)
+        {
+            this._o2 = this._o2OverTime[2];
+            this._value = this._valueOverTime[2];
+        }
+        else
+        {
+            this._o2 = this._o2OverTime[3];
+            this._value = this._valueOverTime[3];
+        }
+
+        this._o2/25 * this._changeRate;
+        this._value/25 * this._changeRate;
+
+        return this;
+
+
     }
 
     growTree()
@@ -57,14 +91,14 @@ export default class Tree {
         {
             return;
         }
-        this._age++;
+        //this._age++;
 
-        console.log("Tree Age:", this._value );
 
-        this._remainLife = this._age * this._maxAge/100;
+
+        //this._remainLife = this._age * this._maxAge/100;
         this._checkAge();
 
-
+        /**
         let ageIndex = 0;
         // Find largest age category we fit into
        for (let i = 0; i < this._ageValues.length; i++) {
@@ -75,8 +109,9 @@ export default class Tree {
        }
        this._o2 = this._o2OverTime[ageIndex];
        this._value = this._valueOverTime[ageIndex];
+        **/
 
-       return this;
+       return this._growTree();
     }
     
     _checkAge()
