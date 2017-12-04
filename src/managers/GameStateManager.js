@@ -9,7 +9,7 @@ const GAME_CONSTANTS = {
 // Not technically a singleton but should only ever be called once per game
 export default class GameStateManager {
     constructor() {
-        this.MAXCO2LEVEL = 50;
+        this.MAXCO2LEVEL = 100;
         this.trees = [];
         this.population = 1;
         this.CO2Level = 0;
