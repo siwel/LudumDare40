@@ -37,7 +37,7 @@ export default class TreeDetails extends React.Component {
 	render() {
 		const {slotNumber, tree} = this.props;
 
-		console.log("Rendering details", tree);
+		// console.log("Rendering details", tree);
 
 		
 		const popup = tree && (

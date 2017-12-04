@@ -23,7 +23,7 @@ export default class extends React.Component {
     _onPurchase(msg, data)
     {
         // debugger;
-        console.log(msg, data);
+        // console.log(msg, data);
 
         if(data.getSlotNumber() === this.props.slotNumber)
         {
@@ -36,7 +36,7 @@ export default class extends React.Component {
 
     _onSale(msg, data)
     {
-        console.log(data.slotNumber, this.props.slotNumber);
+        // console.log(data.slotNumber, this.props.slotNumber);
         if(data.slotNumber === this.props.slotNumber)
         {
             this.setState({occupied: false})

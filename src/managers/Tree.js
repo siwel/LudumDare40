@@ -21,7 +21,7 @@ export default class Tree {
 
         this._ageValues = this._getAgeValues();
 
-        console.log("Tree created.");
+        // console.log("Tree created.");
     }
 
     get treeData() {
@@ -55,7 +55,7 @@ export default class Tree {
         }
 
         this._age += this._changeRate;
-        console.log("Tree Age: 11", this._age , this._changeRate);
+        // console.log("Tree Age: 11", this._age , this._changeRate);
 
         this._currentAge = this._age *100/this._maxAge;
 

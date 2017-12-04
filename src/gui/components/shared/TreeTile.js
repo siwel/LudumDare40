@@ -18,12 +18,12 @@ export class TreeTile extends React.Component {
 
 
     onBuy() {
-        console.log(`Attempting to buy ${this.props.type.displayName} for slot ${this.props.slotNumber}`);
+        // console.log(`Attempting to buy ${this.props.type.displayName} for slot ${this.props.slotNumber}`);
         PubSubWrapper.publish(PubSubTopics.PURCHASE_REQUEST, {tree: this.props.type, slotNumber: this.props.slotNumber});
     }
 
     onSell() {
-        console.log(`Selling ${this.props.type.displayName} in slot ${this.props.slotNumber}`);
+        // console.log(`Selling ${this.props.type.displayName} in slot ${this.props.slotNumber}`);
         PubSubWrapper.publish(PubSubTopics.SELL_REQUEST, {tree: this.props.tree, slotNumber: this.props.slotNumber});
     }
 

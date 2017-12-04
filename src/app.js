@@ -22,7 +22,7 @@ PubSub.subscribe(PubSubTopics.BALANCE_UPDATE, (msg, balance) => {gui.update({bal
 // Can probably remove this with the below, but maybe not yet in case we need it as it took ages
 let treeLocationsMap = [];
 PubSub.subscribe(PubSubTopics.TREE_ADDED, (msg, data) => {
-	console.log(msg, data);
+	// console.log(msg, data);
 	treeLocationsMap = data;
 });
 
@@ -43,7 +43,7 @@ document.body.addEventListener('mousemove', event => {
 
 // TODO we can probably remove this now that slots exist
 document.getElementById('game').addEventListener('click', event => {
-	console.log("Click");
+	// console.log("Click");
 	//if (mousedOverTree) {
 		gui.update({tree: mousedOverTree});
 	//}
@@ -81,7 +81,7 @@ for (let topic of Object.getOwnPropertyNames(PubSubTopics)) {
 
 // create a function to subscribe to topics
 var mySubscriber = function( msg, data ){
-    console.log( msg, data );
+    // console.log( msg, data );
 };
 
 var token = PubSub.subscribe( 'MY TOPIC', mySubscriber );
