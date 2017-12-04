@@ -36,12 +36,42 @@
 	top: 0;
 	height: 6vh;
 	font-size: 4vh;
-	background-color: rgba(255, 255, 255, .75);
+	/*background-color: rgba(255, 255, 255, .75);*/
 }
 
 .co2 {
 	display: flex;
-	margin-left: 1em;
+	margin-left: 3px;
+}
+
+.co2Icon{
+	height: 40px;
+	width: 40px;
+}
+
+.co2Bar{
+	height: 30px;
+	margin-top: 5px;
+	margin-left: 5px;
+	position: relative;
+}
+
+.co2BarImage{
+	height: 100%;
+}
+
+.co2BarMarker{
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+
+.co2BarImageContainer{
+	height: 93%;
+	transition: width 1s;
+	overflow: hidden;
 }
 
 .co2__graph {
