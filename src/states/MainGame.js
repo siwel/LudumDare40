@@ -21,11 +21,18 @@ class MainGame extends Phaser.State {
     }
 
     create() {
-        //add background image
+
+        //NOT THE ORDER OF ALL OF THIS LOADING IS IMPORTANT TO THE LAYER ORDER #gamejam
         this.background = this.game.add.sprite(0, 0, 'background');
         this.background.height = this.game.world.height;
         this.background.width = this.game.world.width;
 
+
+        const factoryHeight = 100;
+        const factoryWidth = 100;
+        this.factory = this.game.add.sprite(30, this.game.world.height - GROUD_HEIGHT - factoryHeight + 10, 'factory');
+        this.factory.height = factoryHeight;
+        this.factory.width = factoryWidth;
 
         this.treeGroup = this.game.add.group();
 
