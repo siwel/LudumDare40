@@ -44,7 +44,7 @@ export class Game extends Phaser.Game {
     }
 
 	onEvent(msg, data) {
-		console.log(`Event: ${msg} ${data}`);
+		//console.log(`Event: ${msg} ${data}`);
 
 		switch (msg) {
 			case topics.BALANCE_CHANGE:
