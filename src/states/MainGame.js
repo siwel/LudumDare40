@@ -5,6 +5,7 @@ import * as Phaser from "phaser-ce";
 
 const TOP_BAR_SIZE = 0.06;
 const BOTTOM_BAR_SIZE = 0.04;
+const GROUD_HEIGHT = 80;
 
 class MainGame extends Phaser.State {
 
@@ -26,9 +27,10 @@ class MainGame extends Phaser.State {
         this.background.width = this.game.world.width;
 
 
-        const height = 80;
-        this.ground = this.game.add.sprite(0, this.game.world.height - height, 'ground');
-        this.ground.height = height;
+        this.treeGroup = this.game.add.group();
+
+        this.ground = this.game.add.sprite(0, this.game.world.height - GROUD_HEIGHT, 'ground');
+        this.ground.height = GROUD_HEIGHT;
         this.ground.width = this.game.world.width;
 
         //this.panel = this.game.add.sprite(0,0,'panel');
@@ -80,10 +82,11 @@ class MainGame extends Phaser.State {
     addTree(tree) {
         const slotWidth = this.game.width / GameStateManager.CONSTANTS.SLOTS;
 
+        const adjustedGroundHeight = GROUD_HEIGHT - 10;
         const xStart = slotWidth * tree.getSlotNumber() + (slotWidth/2);
-        const yStart = this.game.world.height + BOTTOM_BAR_SIZE;
+        const yStart = this.game.world.height - adjustedGroundHeight;
 
-        const sprite = this.game.add.sprite(xStart, yStart, tree.getAssetName());
+        const sprite = this.treeGroup.create(xStart, yStart, tree.getAssetName());
 
         sprite.anchor.set(0.5, 1);
 
@@ -91,13 +94,14 @@ class MainGame extends Phaser.State {
         //TODO: might need to change this more to a scale tween when we have actual assets
         //TODO: would be nice here to use the growth graph as a easing function
         const duration = GameStateManager.CONSTANTS.ONE_DAY_DURATION * tree.getMaxAge();
-        const tween = this.game.add.tween(sprite).from( { y: this.game.world.height + sprite.height}, duration, Phaser.Easing.Bounce.Linear, true);
+        const tween = this.game.add.tween(sprite).from( { y: this.game.world.height + sprite.height - adjustedGroundHeight}, duration, Phaser.Easing.Bounce.Linear, true);
 
         // #gamejam
         const frame = sprite._frame;
         const height = frame.height;
         const width = frame.width;
 
+        this.treeLocationMap.push({
         this.treeLocationMap.push({
             tree,
             xStart,
