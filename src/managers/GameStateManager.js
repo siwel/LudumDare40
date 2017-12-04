@@ -9,8 +9,9 @@ const GAME_CONSTANTS = {
 // Not technically a singleton but should only ever be called once per game
 export default class GameStateManager {
     constructor() {
-        this.MAXCO2LEVEL = 100;
+        this.MAXCO2LEVEL = 10;
         this.trees = [];
+        this.maxPopulation = 0;
         this.population = 1;
         this.CO2Level = 0;
         this.CO2IncreasePerTick = 0;
@@ -27,6 +28,7 @@ export default class GameStateManager {
         return {
             trees: this.trees,
             population: this.population,
+            maxPopulation: this.maxPopulation,
             CO2Level: this.CO2Level,
             CO2IncreasePerTick: this.CO2IncreasePerTick,
             CO2DecreasePerTick: this.CO2DecreasePerTick,
@@ -51,6 +53,11 @@ export default class GameStateManager {
 
 
         this.population += this.trees.length;
+
+        if(this.population > this.maxPopulation)
+        {
+            this.maxPopulation = this.population;
+        }
 
         if(this.CO2Level === this.MAXCO2LEVEL)
         {
