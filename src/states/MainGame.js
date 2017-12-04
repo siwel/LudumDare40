@@ -14,7 +14,7 @@ class MainGame extends Phaser.State {
         this.selectionOrder = [];
 
         this.trees = new Map;
-        this.tweenList = new Map;
+        this.spriteList = new Map;
 
         this.treeLocationMap = [];
     }
@@ -91,7 +91,6 @@ class MainGame extends Phaser.State {
         //TODO: would be nice here to use the growth graph as a easing function
         const duration = GameStateManager.CONSTANTS.ONE_DAY_DURATION * tree.getMaxAge();
         const tween = this.game.add.tween(sprite).from( { y: this.game.world.height + sprite.height}, duration, Phaser.Easing.Bounce.Linear, true);
-        console.log("Tween", tween);
 
         // #gamejam
         const frame = sprite._frame;
@@ -109,7 +108,7 @@ class MainGame extends Phaser.State {
         PubSub.publish(PubSubTopics.TREE_ADDED, this.treeLocationMap);
 
         this.trees.set(tree.id, tree);
-        this.tweenList.set(tree.id, tween);
+        this.spriteList.set(tree.id, sprite);
         this._renderTrees();
     }
 
@@ -119,8 +118,8 @@ class MainGame extends Phaser.State {
     removeTree(tree) {
         if (this.trees.has(tree.id)) {
             this.trees.delete(tree.id);
-            this.game.tweens.remove(this.tweenList.get(tree.id));
-            //this.sprites.delete(tree.id);
+            this.spriteList.get(tree.id).destroy();
+            this.spriteList.delete(tree.id);
         }
         this._renderTrees();
 
