@@ -9,7 +9,7 @@ const GAME_CONSTANTS = {
 // Not technically a singleton but should only ever be called once per game
 export default class GameStateManager {
     constructor() {
-        this.MAXCO2LEVEL = 10;
+        this.MAXCO2LEVEL = 50;
         this.trees = [];
         this.population = 1;
         this.CO2Level = 0;
@@ -142,7 +142,7 @@ export default class GameStateManager {
                 maxAge: 10,
                 assetName: "Jamboo",
                 valueOverTime: [0, 80, 60, 10],
-                o2OverTime: [7, 33, 48, 53],
+                o2OverTime: [7, 33, 48, 0],
                 saplingPrice: 10,
                 growthRate:1
             },
