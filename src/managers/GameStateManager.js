@@ -46,14 +46,34 @@ export default class GameStateManager {
 
         this.CO2DecreasePerTick = this.trees.reduce((total, tree) => total + tree.getO2(), 0);
 
+        this.populationAddingCO2 = Math.floor(5*this.population/100);
+
+        if(this.CO2Level < 25)
+        {
+            this.CO2Level = Math.floor(this.populationAddingCO2*3);
+        }
+
+
         this.CO2Level -= this.CO2DecreasePerTick;
+
+        this._currentCO2 = (this.populationAddingCO2 * 100/this.MAXCO2LEVEL);
+
+        if(this.CO2Level >= 99)
+        {
+            this.CO2Level = 99;
+        }
 
         if(this.CO2Level <=0)
         {
             this.CO2Level = 0;
         }
 
-        if(this.populationAddingCO2 < 25)
+        console.log("CO2 level: "+this.CO2Level);
+        console.log("this.population: "+this.population);
+        console.log("this.populationAddingCO2: "+this.populationAddingCO2);
+
+
+        if(this.CO2Level < 25)
         {
             if(this.population < 25)
             {
@@ -75,45 +95,30 @@ export default class GameStateManager {
                     this.population +=10;
                 }
 
-
         }
-
-
-
-        this.populationAddingCO2 += Math.floor(5*this.population/100);
-        this.CO2Level += this.populationAddingCO2;
-
-        if(this.CO2Level >= 99)
+        else if(this.CO2Level > 25 && this.CO2Level < 50)
         {
-            this.CO2Level = 99;
+            //TODO Start to kill population
+            let killingRate = Math.floor(10*this.population/100);
+            console.log("killingRate0: "+killingRate)
+            this.population -= killingRate ? killingRate:1;
         }
-
-        this._currentCO2 = (this.CO2Level * 100/this.MAXCO2LEVEL)+this.populationAddingCO2;
+        else if(this.CO2Level > 50 && this.CO2Level < 75)
+        {
+            let killingRate = Math.floor(10*this.population/100);
+            console.log("killingRate1: "+killingRate)
+            this.population -= killingRate ? killingRate:1;
+        }
+        else if(this.CO2Level > 75)
+        {
+            let killingRate = Math.floor(10*this.population/100);
+            console.log("killingRate2: "+killingRate)
+            this.population -= killingRate ? killingRate:1;
+        }
 
         if(this.population > this.maxPopulation)
         {
             this.maxPopulation = this.population;
-        }
-
-        if(this.CO2Level === this.MAXCO2LEVEL)
-        //console.log("C02: ", this.CO2Level );
-        //console.log("populationAddingCO2: ", this.populationAddingCO2 );
-
-        if(this._currentCO2 > 25 && this._currentCO2 < 50)
-        {
-            //TODO Start to kill population
-            let killingRate = Math.floor(10*this.population/100);
-            this.population -= killingRate ? killingRate:1;
-        }
-        else if(this._currentCO2 > 50 && this._currentCO2 < 75)
-        {
-            let killingRate = Math.floor(10*this.population/100);
-            this.population -= killingRate ? killingRate:1;
-        }
-        else if(this._currentCO2 > 75)
-        {
-            let killingRate = Math.floor(10*this.population/100);
-            this.population -= killingRate ? killingRate:1;
         }
 
         if(this.population <= 0)
