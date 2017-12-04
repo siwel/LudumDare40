@@ -34,6 +34,30 @@ class MainGame extends Phaser.State {
         this.factory.height = factoryHeight;
         this.factory.width = factoryWidth;
 
+
+        this.smokeEmitter = this.game.add.emitter(0, 0, 50);
+
+        this.smokeEmitter.makeParticles('smoke');
+        // this.smokeEmitter.gravity = -200;
+
+        this.smokeEmitter.setSize(5,5);
+        this.smokeEmitter.x = this.factory.centerX;
+        this.smokeEmitter.y = this.factory.y;
+
+
+        this.smokeEmitter.setRotation(0, 0);
+        this.smokeEmitter.setAlpha(0.1, 1, 2500);
+        this.smokeEmitter.setScale(0.1, .6, 0.1, .6, 2500, Phaser.Easing.Quintic.Out);
+        this.smokeEmitter.gravity = -200;
+
+        this.smokeEmitter.start(false, 3000, 50);
+
+        this.smokeEmitter.emitX = 0;
+
+
+        // this.smokeEmitter.start(false, 4000, 500, 0);
+
+
         this.treeGroup = this.game.add.group();
 
         this.ground = this.game.add.sprite(0, this.game.world.height - GROUD_HEIGHT, 'ground');
