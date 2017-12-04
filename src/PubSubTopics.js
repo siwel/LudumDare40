@@ -1,5 +1,5 @@
 const PubSubTopics = {
-	BALANCE_CHANGE: 'Balance Change', // Data - diff: number
+	BALANCE_UPDATE: 'Balance Update', // Data - newBalance: number
 	CO2_LEVEL_CHANGE: 'CO2 Level Change', // Data - diff: number
 	POPULATION_CHANGE: 'Population Change', // Data - diff: number
 	PURCHASE_REQUEST: 'PurchaseRequest', // Data - {tree: Tree}

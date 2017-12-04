@@ -16,6 +16,8 @@ const gui = new Gui(document.getElementById('gui'), {
     title: 'Subtitle/Info',
 });
 
+PubSub.subscribe(PubSubTopics.BALANCE_UPDATE, (msg, balance) => {gui.update({balance});});
+
 // #gamejam
 // Can probably remove this with the below, but maybe not yet in case we need it as it took ages
 let treeLocationsMap = [];

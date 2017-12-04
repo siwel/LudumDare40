@@ -79,12 +79,14 @@ export default class GameStateManager {
 
 
         PubSub.publish(PubSubTopics.PURCHASE_SUCCESS, tree);
+        PubSub.publish(PubSubTopics.BALANCE_UPDATE, this.balance);
     }
 
     _onSellRequest(msg, data) {
         console.log(data);
         this.balance += data.tree.getValue();
         PubSub.publish(PubSubTopics.SELL_SUCCESS, data);
+        PubSub.publish(PubSubTopics.BALANCE_UPDATE, this.balance);
     }
 
     // Diff can be + or -
