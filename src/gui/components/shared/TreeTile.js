@@ -38,7 +38,7 @@ export class TreeTile extends React.Component {
     }
 
     render() {
-        const {buyMode, tree, type} = this.props;
+        const {buyMode, sellValue, tree, type} = this.props;
 
         const action = buyMode === true ? 'Plant' : 'Sell';
         //const tree = type;
@@ -57,6 +57,7 @@ export class TreeTile extends React.Component {
         valueData[valueData.length - 1]['Age'] = type.maxAge;
 
         const onClick = buyMode === true ? this.onBuy : this.onSell;
+        const price = buyMode === true ? type.saplingPrice : sellValue;
 
         return (
             <div className={styles.treeTile}>
@@ -72,7 +73,7 @@ export class TreeTile extends React.Component {
                 </LineChart>
 
 
-                <div onClick={onClick}>{`${action} for $${type.saplingPrice}`}</div>
+                <div onClick={onClick}>{`${action} for $${price}`}</div>
 
             </div>
         )

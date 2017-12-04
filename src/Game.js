@@ -47,7 +47,7 @@ export class Game extends Phaser.Game {
 		//console.log(`Event: ${msg} ${data}`);
 
 		switch (msg) {
-			case topics.BALANCE_CHANGE:
+			case topics.BALANCE_UPDATE:
 				break;
 			case topics.CO2_LEVEL_CHANGE:
 				break;
