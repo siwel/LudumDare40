@@ -3,7 +3,7 @@ export default class Button extends Phaser.Sprite{
     constructor(game, x, y,spriteName , frame, value, callback) {
         super(game, x, y, spriteName, frame);
 
-        // console.log("Button", game);
+        console.log("Button", game);
 
         this.anchor.setTo(0.5, 0.5);
 
@@ -21,7 +21,7 @@ export default class Button extends Phaser.Sprite{
 
     clicked()
     {
-        // console.log(this._id);
+        console.log(this._id);
         const ready_tween = this.game.add.tween(this.scale)
             .to({ x: 3.5, y: 1.1}, 500, Phaser.Easing.Linear.In,false,0,1,true);
 

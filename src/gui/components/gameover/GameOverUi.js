@@ -7,7 +7,7 @@ export class GameOverUi extends React.Component {
     render() {
         const {gameOver} = this.props;
 
-        // console.log("Game:", gameOver);
+        console.log("Game:", gameOver);
 
         return <div className={styles.gameOver}>
             {this.props.gameOver}

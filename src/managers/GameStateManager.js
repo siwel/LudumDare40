@@ -20,7 +20,7 @@ export default class GameStateManager {
 
         this.subscribeToEvents();
 
-        // console.log("GameStateManager")
+        console.log("GameStateManager")
     }
 
     get stateData() {
@@ -44,7 +44,7 @@ export default class GameStateManager {
 
         this.CO2Level += (this.CO2IncreasePerTick - this.CO2DecreasePerTick) * -1;
 
-        // console.log("CO2", this.CO2Level, "CO2IncreasePerTick: "+ this.CO2IncreasePerTick);
+        console.log("CO2", this.CO2Level, "CO2IncreasePerTick: "+ this.CO2IncreasePerTick);
 
 
         //TODO: take into account co2 selling trees etc
@@ -83,7 +83,7 @@ export default class GameStateManager {
     }
 
     _onSellRequest(msg, data) {
-        // console.log(data);
+        console.log(data);
         this.balance += data.tree.getValue();
         PubSub.publish(PubSubTopics.SELL_SUCCESS, data);
         PubSub.publish(PubSubTopics.BALANCE_UPDATE, this.balance);
@@ -110,7 +110,7 @@ export default class GameStateManager {
 
     _removeTree(msg, data)
     {
-        // console.log(msg,data);
+        console.log(msg,data);
     }
 
 
