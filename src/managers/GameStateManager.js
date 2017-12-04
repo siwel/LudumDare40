@@ -18,6 +18,8 @@ export default class GameStateManager {
         this.balance = 20;
         this.moneyPerTick = 1;
 
+        this.populationAddingCO2 = 0;
+
         this.subscribeToEvents();
 
         console.log("GameStateManager")
@@ -40,28 +42,69 @@ export default class GameStateManager {
 
         this.trees.map(tree => tree.growTree());
 
-        this.CO2IncreasePerTick = this.trees.reduce((total, tree) => total + tree.getO2(), 0);
-
-        this.CO2Level += (this.CO2IncreasePerTick - this.CO2DecreasePerTick) * -1;
-
-        console.log("CO2", this.CO2Level, "CO2IncreasePerTick: "+ this.CO2IncreasePerTick);
+        this.CO2DecreasePerTick = this.trees.reduce((total, tree) => total + tree.getO2(), 0);
 
 
-        //TODO: take into account co2 selling trees etc
+
+        this.CO2Level += (this.CO2DecreasePerTick -this.CO2IncreasePerTick) * -1;
+
+        if(this.CO2Level <=0)
+        {
+            this.CO2Level = 0;
+        }
+
+        if(this.populationAddingCO2 < 25)
+        {
+            if(this.population < 25)
+            {
+                this.population +=2;
+            }
+
+            else if(this.population < 100)
+            {
+                this.population +=3;
+            }
 
 
-        this.population += this.trees.length;
+            else if(this.population < 200)
+            {
+                this.population +=5;
+            }
+            else
+                {
+                    this.population +=10;
+                }
 
-        if(this.CO2Level === this.MAXCO2LEVEL)
+                this.populationAddingCO2 += Math.floor(10*this.population/100);
+            //this.CO2Level = this.populationAddingCO2;
+        }
+
+        this._currentCO2 = (this.CO2Level * 100/this.MAXCO2LEVEL)+this.populationAddingCO2;
+
+        //this.CO2Level = this._currentCO2;
+
+        if(this._currentCO2 > 25 && this._currentCO2 < 50)
         {
             //TODO Start to kill population
-            this.population--;
+            let killingRate = Math.floor(10*this.population/100);
+            this.population -= killingRate ? killingRate:1;
+        }
+        else if(this._currentCO2 > 50 && this._currentCO2 < 75)
+        {
+            let killingRate = Math.floor(10*this.population/100);
+            this.population -= killingRate ? killingRate:1;
+        }
+        else if(this._currentCO2 > 75)
+        {
+            let killingRate = Math.floor(10*this.population/100);
+            this.population -= killingRate ? killingRate:1;
         }
 
         if(this.population <= 0)
         {
             PubSub.publish(PubSubTopics.GAME_END, this)
         }
+
     }
 
 
