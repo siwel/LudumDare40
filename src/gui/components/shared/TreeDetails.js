@@ -4,6 +4,7 @@ import styles from '../../styles/gui.css';
 import PubSubWrapper from "../../../util/PubSubWrapper";
 import PubSubTopics from "../../../PubSubTopics";
 import {TreeTile} from './TreeTile';
+import slotEmpty from '../../../../assets/gui/slotEmpty.png'
 
 // TODO this should be in the bottombar folder really
 export default class TreeDetails extends React.Component {
@@ -60,7 +61,7 @@ export default class TreeDetails extends React.Component {
 
 		const button = (
 			<div className={styles.slotItem}>
-				<button className={styles.tree__btn} onClick={this._onClick}>🌳</button>
+				<button className={styles.tree__btn} onClick={this._onClick}><img className={styles.slotEmptyImage} src={slotEmpty} /><span className={styles.slotPlantImage}>🌳</span></button>
 				{this.state.showingPopup && popup}
 			</div>
 		);

@@ -26,8 +26,9 @@ class MainGame extends Phaser.State {
         this.background.width = this.game.world.width;
 
 
-        this.ground = this.game.add.sprite(0, this.game.world.height - 50, 'ground');
-        this.ground.height = 50;
+        const height = 80;
+        this.ground = this.game.add.sprite(0, this.game.world.height - height, 'ground');
+        this.ground.height = height;
         this.ground.width = this.game.world.width;
 
         //this.panel = this.game.add.sprite(0,0,'panel');
