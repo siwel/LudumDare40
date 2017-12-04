@@ -4,6 +4,7 @@ import styles from '../../styles/gui.css';
 import {TreeTile} from "../shared/TreeTile";
 import GameStateManager from "../../../managers/GameStateManager";
 import {TreeListItem} from "../shared/TreeListItem";
+import slotEmpty from '../../../../assets/gui/slotEmpty.png'
 
 export class Shop extends React.Component {
 
@@ -39,13 +40,13 @@ export class Shop extends React.Component {
             />);
 
         const shopButton = <div className={styles.slotItem}>
-            <button className={styles.tree__btn} onClick={this.onClick}>🕳</button>
+            <button className={styles.tree__btn} onClick={this.onClick}><img className={styles.slotEmptyImage} src={slotEmpty} /> </button>
         </div>;
 
         if (this.state.showingShow === true) {
             return (
                 <div className={styles.slotItem}>
-                    <button className={styles.tree__btn} onClick={this.onClick}>🕳</button>
+                    <button className={styles.tree__btn} onClick={this.onClick}><img className={styles.slotEmptyImage} src={slotEmpty} /></button>
 
                     <div className={styles.shopWrapper}>
                         <div className={styles.shopModal}>

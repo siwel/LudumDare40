@@ -12,8 +12,6 @@
 	position: absolute;
 	right: 0;
 	left: 0;
-	display: flex;
-	justify-content: space-between;
 }
 .gameOver
 {
@@ -36,12 +34,47 @@
 	top: 0;
 	height: 6vh;
 	font-size: 4vh;
-	background-color: rgba(255, 255, 255, .75);
+	/*background-color: rgba(255, 255, 255, .75);*/
 }
 
-.co2 {
+.co2, .population, .balance {
 	display: flex;
-	margin-left: 1em;
+	margin-left: 3px;
+	align-items: center;
+	color: #fff;
+	font-family: 'Maven Pro', sans-serif;
+	font-weight: bold;
+}
+
+
+.co2Icon, .popImg{
+	height: 30px;
+	width: 30px;
+}
+
+.co2Bar{
+	height: 30px;
+	margin-top: 5px;
+	margin-left: 5px;
+	position: relative;
+}
+
+.co2BarImage{
+	height: 100%;
+}
+
+.co2BarMarker{
+	height: 100%;
+	position: absolute;
+	left: 0;
+	top: 0;
+}
+
+
+.co2BarImageContainer{
+	height: 93%;
+	transition: width 1s;
+	overflow: hidden;
 }
 
 .co2__graph {
@@ -56,8 +89,9 @@
 
 .bottomBar {
 	bottom: 0;
-	height: 4vh;
+	height: 50px;
 	font-size: 2.5vh;
+	display: flex;
 	background-color: none;
 }
 
@@ -75,6 +109,7 @@
 	user-select: none;
 	outline: none;
 	cursor: pointer;
+	position: relative;
 }
 
 
@@ -131,4 +166,16 @@
 	width: 100%;
 	flex-basis: 100%;
 	text-align: center;
+}
+
+.slotEmptyImage{
+	width: 40px;
+	height: 40px;
+}
+
+.slotPlantImage{
+	position: absolute;
+	top: 7px;
+	left: 0;
+	right: 0;
 }

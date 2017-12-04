@@ -17,7 +17,7 @@ export default class extends React.Component {
         };
 
         PubSubWrapper.subscribe(PubSubTopics.PURCHASE_SUCCESS, this._onPurchase.bind(this));
-        PubSubWrapper.subscribe(PubSubTopics.SELL_SUCCESS, () => this._onSale);
+        PubSubWrapper.subscribe(PubSubTopics.SELL_SUCCESS, this._onSale.bind(this));
     }
 
     _onPurchase(msg, data)
@@ -34,9 +34,10 @@ export default class extends React.Component {
         }
     }
 
-    _onSale(data)
+    _onSale(msg, data)
     {
-        if(data.getSlotNumber() === this.props.slotNumber)
+        console.log(data.slotNumber, this.props.slotNumber);
+        if(data.slotNumber === this.props.slotNumber)
         {
             this.setState({occupied: false})
         }

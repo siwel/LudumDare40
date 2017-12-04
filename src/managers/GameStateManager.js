@@ -9,7 +9,7 @@ const GAME_CONSTANTS = {
 // Not technically a singleton but should only ever be called once per game
 export default class GameStateManager {
     constructor() {
-        this.MAXCO2LEVEL = 50;
+        this.MAXCO2LEVEL = 100;
         this.trees = [];
         this.population = 1;
         this.CO2Level = 0;
@@ -121,11 +121,15 @@ export default class GameStateManager {
         let tree = this._createTree(data.tree, data.slotNumber);
 
 
-        PubSub.publish(PubSubTopics.PURCHASE_SUCCESS, tree)
+        PubSub.publish(PubSubTopics.PURCHASE_SUCCESS, tree);
+        PubSub.publish(PubSubTopics.BALANCE_UPDATE, this.balance);
     }
 
     _onSellRequest(msg, data) {
-
+        console.log(data);
+        this.balance += data.tree.getValue();
+        PubSub.publish(PubSubTopics.SELL_SUCCESS, data);
+        PubSub.publish(PubSubTopics.BALANCE_UPDATE, this.balance);
     }
 
     // Diff can be + or -
@@ -158,6 +162,7 @@ export default class GameStateManager {
         PubSub.subscribe(PubSubTopics.PURCHASE_REQUEST, (topic, data) => {
             this._onPurchaseRequest(topic, data)
         });
+        PubSub.subscribe(PubSubTopics.SELL_REQUEST, this._onSellRequest.bind(this));
         PubSub.subscribe(PubSubTopics.POPULATION_CHANGE, this._onPopulationChange.bind(this));
         PubSub.subscribe(PubSubTopics.TREE_IS_DEAD, (topic,data) =>
         {
