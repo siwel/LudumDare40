@@ -18,6 +18,8 @@ class Preloader extends Phaser.State {
 
     loadResources() {
 
+        this.game.load.image('factory','image/factory.png');
+        this.game.load.image('smoke','image/smoke.png');
         this.game.load.image('background','image/blueBg.png');
 
         // Some trees
@@ -28,7 +30,7 @@ class Preloader extends Phaser.State {
 
         //this.game.load.spritesheet('target', 'target.png',128.66,128);
         this.game.load.audio('bgSound','sound/bensound-betterdays.mp3');
-        this.game.load.image('levelButton','image/levelButton.png');
+        //this.game.load.image('levelButton','image/levelButton.png');
         this.game.load.image('ground','image/ground.png');
 
     }

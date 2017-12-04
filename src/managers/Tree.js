@@ -49,10 +49,6 @@ export default class Tree {
 
     _growTree()
     {
-        if(!this._life)
-        {
-            return;
-        }
 
         this._age += this._changeRate;
         console.log("Tree Age: 11", this._age , this._changeRate);
@@ -83,11 +79,6 @@ export default class Tree {
             this._value = this._valueOverTime[3];
         }
 
-        
-
-        this._o2/25 * this._changeRate;
-        this._value/25 * this._changeRate;
-
         return this;
     }
 
@@ -105,7 +96,7 @@ export default class Tree {
         if(this._age >= this._maxAge)
         {
             PubSub.publish(PubSubTopics.TREE_IS_DEAD, this);
-            this._life =false;
+            //this._life =false;
         }
     }
 
@@ -121,12 +112,7 @@ export default class Tree {
 
     getO2() 
     {
-        if(this._life)
-        {
-            return this._o2;
-        }
-
-        return 0;
+        return this._o2;
 
     }
 
