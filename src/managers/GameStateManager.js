@@ -44,9 +44,7 @@ export default class GameStateManager {
 
         this.CO2DecreasePerTick = this.trees.reduce((total, tree) => total + tree.getO2(), 0);
 
-
-
-        this.CO2Level += (this.CO2DecreasePerTick -this.CO2IncreasePerTick) * -1;
+        this.CO2Level -= this.CO2DecreasePerTick;
 
         if(this.CO2Level <=0)
         {
@@ -75,13 +73,23 @@ export default class GameStateManager {
                     this.population +=10;
                 }
 
-                this.populationAddingCO2 += Math.floor(10*this.population/100);
-            //this.CO2Level = this.populationAddingCO2;
+
+        }
+
+
+
+        this.populationAddingCO2 += Math.floor(5*this.population/100);
+        this.CO2Level += this.populationAddingCO2;
+
+        if(this.CO2Level >= 99)
+        {
+            this.CO2Level = 99;
         }
 
         this._currentCO2 = (this.CO2Level * 100/this.MAXCO2LEVEL)+this.populationAddingCO2;
 
-        //this.CO2Level = this._currentCO2;
+        //console.log("C02: ", this.CO2Level );
+        //console.log("populationAddingCO2: ", this.populationAddingCO2 );
 
         if(this._currentCO2 > 25 && this._currentCO2 < 50)
         {
@@ -148,7 +156,7 @@ export default class GameStateManager {
     }
 
     getCO2Level() {
-        return this.CO2Level
+        return this.CO2Level;
     }
 
     _removeTree(msg, data)
