@@ -23,6 +23,11 @@ class MainGame extends Phaser.State {
         this.background.height = this.game.world.height;
         this.background.width = this.game.world.width;
 
+
+        this.ground = this.game.add.sprite(0, this.game.world.height - 50, 'ground');
+        this.ground.height = 50;
+        this.ground.width = this.game.world.width;
+
         //this.panel = this.game.add.sprite(0,0,'panel');
         //this.panel.height = this.game.world.height;
         //this.panel.width = this.game.world.width;
@@ -30,6 +35,8 @@ class MainGame extends Phaser.State {
         let bgSounds = this.game.add.audio("bgSound");
         bgSounds.loop = true;
         bgSounds.play();
+
+
 
 
         //setup UI
