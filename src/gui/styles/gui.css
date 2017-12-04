@@ -152,7 +152,7 @@
 .shopModal {
 	padding-top: 80px;
 	border-image-source: url('../../../assets/gui/panel_shop-x2.png');
-	border-image-slice: 30 10 10 10 fill;
+	border-image-slice: 10 10 10 10 fill;
 }
 
 .sellModal {
@@ -169,6 +169,10 @@
 .shopHeader{
 	display: flex;
 	justify-content: center;
+}
+
+.shopGraph {
+
 }
 
 .shopClose__btn__buy, .shopClose__btn__sell {
