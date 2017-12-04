@@ -100,7 +100,13 @@ export default class Tree {
 
     getO2() 
     {
-        return this._o2;
+        if(this._life)
+        {
+            return this._o2;
+        }
+
+        return 0;
+
     }
 
     getValue()

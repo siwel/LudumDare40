@@ -9,7 +9,7 @@ const GAME_CONSTANTS = {
 // Not technically a singleton but should only ever be called once per game
 export default class GameStateManager {
     constructor() {
-        this.MAXCO2LEVEL = 100;
+        this.MAXCO2LEVEL = 10;
         this.trees = [];
         this.population = 1;
         this.CO2Level = 0;
@@ -42,9 +42,9 @@ export default class GameStateManager {
 
         this.CO2IncreasePerTick = this.trees.reduce((total, tree) => total + tree.getO2(), 0);
 
-        this.CO2Level += (this.CO2IncreasePerTick - this.CO2DecreasePerTick);
+        this.CO2Level += (this.CO2IncreasePerTick - this.CO2DecreasePerTick) * -1;
 
-        console.log("CO2", this.CO2Level);
+        console.log("CO2", this.CO2Level, "CO2IncreasePerTick: "+ this.CO2IncreasePerTick);
 
 
         //TODO: take into account co2 selling trees etc
@@ -55,6 +55,7 @@ export default class GameStateManager {
         if(this.CO2Level === this.MAXCO2LEVEL)
         {
             //TODO Start to kill population
+            this.population--;
         }
 
         if(this.population <= 0)
