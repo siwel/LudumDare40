@@ -30,7 +30,7 @@ export class Game extends Phaser.Game {
 	}
 
 	_onSell(data) {
-        this.state.callbackContext.removeTree(data);
+        this.state.callbackContext.removeTree(data.tree);
 	}
 
 	_onTick(data) {

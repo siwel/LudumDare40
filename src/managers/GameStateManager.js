@@ -78,11 +78,13 @@ export default class GameStateManager {
         let tree = this._createTree(data.tree, data.slotNumber);
 
 
-        PubSub.publish(PubSubTopics.PURCHASE_SUCCESS, tree)
+        PubSub.publish(PubSubTopics.PURCHASE_SUCCESS, tree);
     }
 
     _onSellRequest(msg, data) {
-
+        console.log(data);
+        this.balance += data.tree.getValue();
+        PubSub.publish(PubSubTopics.SELL_SUCCESS, data);
     }
 
     // Diff can be + or -
@@ -115,6 +117,7 @@ export default class GameStateManager {
         PubSub.subscribe(PubSubTopics.PURCHASE_REQUEST, (topic, data) => {
             this._onPurchaseRequest(topic, data)
         });
+        PubSub.subscribe(PubSubTopics.SELL_REQUEST, this._onSellRequest.bind(this));
         PubSub.subscribe(PubSubTopics.POPULATION_CHANGE, this._onPopulationChange.bind(this));
         PubSub.subscribe(PubSubTopics.TREE_IS_DEAD, (topic,data) =>
         {

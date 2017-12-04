@@ -14,6 +14,8 @@ class MainGame extends Phaser.State {
         this.selectionOrder = [];
 
         this.trees = new Map;
+        this.tweenList = new Map;
+
         this.treeLocationMap = [];
     }
 
@@ -58,7 +60,6 @@ class MainGame extends Phaser.State {
     }
 
     _renderTrees() {
-
         //let trees = [...this.trees.values()];
         //for (let i = 0; i < trees.length; i++) {
         //    this.game.add.sprite(50 * i, this.game.world.height * TOP_BAR_SIZE, trees[i].getAssetName());
@@ -69,12 +70,6 @@ class MainGame extends Phaser.State {
      * @param {Tree} tree
      */
     addTree(tree) {
-
-
-
-
-
-
         const slotWidth = this.game.width / GameStateManager.CONSTANTS.SLOTS;
 
         const xStart = slotWidth * tree.getSlotNumber() + (slotWidth/2);
@@ -87,7 +82,8 @@ class MainGame extends Phaser.State {
 
         //TODO: might need to change this more to a scale tween when we have actual assets
         const duration = GameStateManager.CONSTANTS.ONE_DAY_DURATION * tree.getMaxAge();
-        this.game.add.tween(sprite).from( { y: this.game.world.height + sprite.height}, duration, Phaser.Easing.Bounce.Linear, true);
+        const tween = this.game.add.tween(sprite).from( { y: this.game.world.height + sprite.height}, duration, Phaser.Easing.Bounce.Linear, true);
+        console.log("Tween", tween);
 
         // #gamejam
         const frame = sprite._frame;
@@ -105,6 +101,7 @@ class MainGame extends Phaser.State {
         PubSub.publish(PubSubTopics.TREE_ADDED, this.treeLocationMap);
 
         this.trees.set(tree.id, tree);
+        this.tweenList.set(tree.id, tween);
         this._renderTrees();
     }
 
@@ -113,7 +110,9 @@ class MainGame extends Phaser.State {
      */
     removeTree(tree) {
         if (this.trees.has(tree.id)) {
-            this.trees.delete(id);
+            this.trees.delete(tree.id);
+            this.game.tweens.remove(this.tweenList.get(tree.id));
+            //this.sprites.delete(tree.id);
         }
         this._renderTrees();
 

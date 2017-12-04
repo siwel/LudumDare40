@@ -24,7 +24,7 @@ export class TreeTile extends React.Component {
 
     onSell() {
         console.log(`Selling ${this.props.type.displayName} in slot ${this.props.slotNumber}`);
-        PubSubWrapper.publish(PubSubTopics.SELL_REQUEST, {tree: this.props.type, slotNumber: this.props.slotNumber});
+        PubSubWrapper.publish(PubSubTopics.SELL_REQUEST, {tree: this.props.tree, slotNumber: this.props.slotNumber});
     }
 
     shouldComponentUpdate(nextProps)
@@ -38,30 +38,30 @@ export class TreeTile extends React.Component {
     }
 
     render() {
-        const {buyMode, type} = this.props;
+        const {buyMode, tree, type} = this.props;
 
         const action = buyMode === true ? 'Plant' : 'Sell';
-        const tree = type;
+        //const tree = type;
 
 
-        const valueData = tree.valueOverTime.map(value => ({'Sale Value': value}));
+        const valueData = type.valueOverTime.map(value => ({'Sale Value': value}));
 
 
 
         for(let i = 0; i < valueData.length; i++)
         {
-            valueData[i]['Age'] = Math.round(tree.maxAge / (valueData.length - 1)) * i; 
-            valueData[i]['o2 Production'] = tree.o2OverTime[i];
+            valueData[i]['Age'] = Math.round(type.maxAge / (valueData.length - 1)) * i; 
+            valueData[i]['o2 Production'] = type.o2OverTime[i];
         }
 
-        valueData[valueData.length - 1]['Age'] = tree.maxAge;
+        valueData[valueData.length - 1]['Age'] = type.maxAge;
 
         const onClick = buyMode === true ? this.onBuy : this.onSell;
 
         return (
             <div className={styles.treeTile}>
 
-                <h1>{tree.displayName}</h1>
+                <h1>{type.displayName}</h1>
 
                 <LineChart width={400} height={100} data={valueData}>
                     <Tooltip/>
@@ -72,7 +72,7 @@ export class TreeTile extends React.Component {
                 </LineChart>
 
 
-                <div onClick={onClick}>{`${action} for $${tree.saplingPrice}`}</div>
+                <div onClick={onClick}>{`${action} for $${type.saplingPrice}`}</div>
 
             </div>
         )

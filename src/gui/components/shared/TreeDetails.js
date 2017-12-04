@@ -16,12 +16,18 @@ export default class TreeDetails extends React.Component {
 		this.state = {
 			showingPopup: false,
 		}
+
+		PubSubWrapper.subscribe(PubSubTopics.SELL_SUCCESS, this._onSale.bind(this));
 	}
 
 	//onBuy(tree) {
 	//	console.log(`Attempting to buy ${tree.displayName}`);
 	//	PubSubWrapper.publish(PubSubTopics.PURCHASE_REQUEST, {tree: tree})
 	//}
+
+	_onSale(topic, data) {
+		this.setState({showingPopup: false});
+	}
 
 	_onClick() {
 		this.setState({showingPopup: !this.state.showingPopup});
@@ -44,6 +50,7 @@ export default class TreeDetails extends React.Component {
 
 					<TreeTile
 						type={tree.treeData}
+						tree={tree}
 						slotNumber={slotNumber}
 					/>
 
