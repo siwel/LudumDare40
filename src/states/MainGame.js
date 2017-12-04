@@ -70,11 +70,6 @@ class MainGame extends Phaser.State {
      */
     addTree(tree) {
 
-
-
-
-
-
         const slotWidth = this.game.width / GameStateManager.CONSTANTS.SLOTS;
 
         const xStart = slotWidth * tree.getSlotNumber() + (slotWidth/2);

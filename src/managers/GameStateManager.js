@@ -139,7 +139,7 @@ export default class GameStateManager {
                 maxAge: 10,
                 assetName: "Jamboo",
                 valueOverTime: [0, 80, 60, 10],
-                o2OverTime: [7, 33, 48, 53],
+                o2OverTime: [7, 33, 48, 0],
                 saplingPrice: 10,
                 growthRate:1
             },

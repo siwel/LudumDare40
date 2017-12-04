@@ -49,6 +49,11 @@ export default class Tree {
 
     _growTree()
     {
+        if(!this._life)
+        {
+            return;
+        }
+
         this._age += this._changeRate;
         console.log("Tree Age: 11", this._age , this._changeRate);
 
@@ -81,35 +86,13 @@ export default class Tree {
         this._value/25 * this._changeRate;
 
         return this;
-
-
     }
 
     growTree()
     {
-        if(!this._life)
-        {
-            return;
-        }
-        //this._age++;
 
-
-
-        //this._remainLife = this._age * this._maxAge/100;
         this._checkAge();
 
-        /**
-        let ageIndex = 0;
-        // Find largest age category we fit into
-       for (let i = 0; i < this._ageValues.length; i++) {
-            if (this._age <= this._ageValues[i]) {
-                break;
-            }
-            ageIndex = i;
-       }
-       this._o2 = this._o2OverTime[ageIndex];
-       this._value = this._valueOverTime[ageIndex];
-        **/
 
        return this._growTree();
     }
