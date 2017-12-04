@@ -11,6 +11,7 @@ export default class GameStateManager {
     constructor() {
         this.MAXCO2LEVEL = 100;
         this.trees = [];
+        this.maxPopulation = 0;
         this.population = 1;
         this.CO2Level = 0;
         this.CO2IncreasePerTick = 0;
@@ -29,6 +30,7 @@ export default class GameStateManager {
         return {
             trees: this.trees,
             population: this.population,
+            maxPopulation: this.maxPopulation,
             CO2Level: this.CO2Level,
             CO2IncreasePerTick: this.CO2IncreasePerTick,
             CO2DecreasePerTick: this.CO2DecreasePerTick,
@@ -88,6 +90,12 @@ export default class GameStateManager {
 
         this._currentCO2 = (this.CO2Level * 100/this.MAXCO2LEVEL)+this.populationAddingCO2;
 
+        if(this.population > this.maxPopulation)
+        {
+            this.maxPopulation = this.population;
+        }
+
+        if(this.CO2Level === this.MAXCO2LEVEL)
         //console.log("C02: ", this.CO2Level );
         //console.log("populationAddingCO2: ", this.populationAddingCO2 );
 

@@ -37,7 +37,7 @@ export default class GameOver extends Phaser.State {
         });
         this.people.anchor.set(0.5,0);
 
-        this.people.setText("Population: "+this._data.population);
+        this.people.setText("Max Population: "+this._data.maxPopulation);
 
 
         this.people = this.add.text(this.game.world.centerX, 300, '', {
