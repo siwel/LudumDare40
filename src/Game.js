@@ -6,6 +6,7 @@ import DrawSomethingState from './states/DrawSomethingState';
 import Preloader from './states/Preloader'
 import MainGame from './states/MainGame'
 import GameOver from './states/GameOver'
+import LoadingPage from './states/LoadingPage'
 
 import topics from './PubSubTopics';
 
@@ -20,6 +21,7 @@ export class Game extends Phaser.Game {
 		this.state.add('DrawSomething', DrawSomethingState, false);
 		this.state.add('Preloader', new Preloader());
 		this.state.add('MainGame', new MainGame());
+		this.state.add('LoadingPage', new LoadingPage());
 		this.state.start('Preloader');
 	}
 
