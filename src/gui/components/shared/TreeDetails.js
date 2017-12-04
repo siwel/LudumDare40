@@ -30,30 +30,31 @@ export default class TreeDetails extends React.Component {
 	}
 
 	_onClick() {
-		this.setState({showingPopup: !this.state.showingPopup});
+		this.setState({showingPopup: !this.state.showingPopup,});
 	}
+
+	//<button className={styles.shopClose__btn} onClick={this._onClick}>Close</button>
 
 	render() {
 		const {slotNumber, tree} = this.props;
+		const {showingPopup, updateHack} = this.state;
 
 		console.log("Rendering details", tree);
 
 		
 		const popup = tree && (
-			<div className={styles.shopWrapper}>
-				<div className={styles.shopModal}>
-
-					<div className={styles.shopHeader}>
-						<h1>Sell Tree</h1>
-						<button className={styles.shopClose__btn} onClick={this._onClick}>Close</button>
+			<div>
+				<div className={styles.shopWrapper}>
+					<div className={styles.shopClose__btn__sell} onClick={this._onClick}></div>
+					<div className={styles.sellModal}>
+						<TreeTile
+							buyMode={false}
+							type={tree.treeData}
+							tree={tree}
+							slotNumber={slotNumber}
+						/>
+	
 					</div>
-
-					<TreeTile
-						type={tree.treeData}
-						tree={tree}
-						slotNumber={slotNumber}
-					/>
-
 				</div>
 			</div>
 		);

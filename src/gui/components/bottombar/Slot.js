@@ -56,10 +56,7 @@ export default class extends React.Component {
     render() {
         const {slotNumber} = this.props;
         const {tree} = this.state;
-        const sellValue = tree ? tree.getValue() : 0; // Should never use this in the 0 case
 
-        console.log("Rendering slot", sellValue);
-
-        return this.state.occupied === true ? <TreeDetails tree={tree} type={tree.treeData} slotNumber={slotNumber} sellValue={sellValue}/> : <Shop slotNumber={slotNumber}/>;
+        return this.state.occupied === true ? <TreeDetails tree={tree} slotNumber={slotNumber} /> : <Shop slotNumber={slotNumber}/>;
     }
 }

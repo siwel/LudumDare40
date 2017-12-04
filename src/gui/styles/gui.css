@@ -115,20 +115,48 @@
 /*SHOP*/
 .shopWrapper{
 	position: fixed;
-	top: 39px;
+	top: 0;
 	bottom: 0;
 	left: 0;
 	right: 0;
-	background-color: rgba(0,0,0,.5);
+	background-color: rgba(0, 0, 0, 0.3);
 	display: flex;
 	align-items: center;
 	justify-content: center;
 }
 
-.shopModal{
+/*.shopWrapper::before {
+	content: '';
+	display: block;
+	width: 50px;
+	max-width: 50px;
+	height: 50px;
+	position: relative;
+	top: 10%;
+	right: 10%;
+
+	background-image: url('../../../assets/gui/btn_close-x2.png');
+	background-size: contain;
+}*/
+
+.shopModal, .sellModal {
 	max-width: 90%;
 	max-height: 90%;
-	background-color: #fff;
+	color: white;
+	padding: 20px;
+	border-image-repeat: stretch;
+	border-style: solid;
+}
+
+.shopModal {
+	padding-top: 80px;
+	border-image-source: url('../../../assets/gui/panel_shop-x2.png');
+	border-image-slice: 30 10 10 10 fill;
+}
+
+.sellModal {
+	background-color: rgba(100, 100, 100, 0.8);
+	border: solid rgba(255, 255, 255, 1) 10px;
 	border-radius: 5px;
 }
 
@@ -139,10 +167,27 @@
 
 .shopHeader{
 	display: flex;
+	justify-content: center;
 }
 
-.shopClose__btn{
+.shopClose__btn__buy, .shopClose__btn__sell {
 	pointer-events: all;
+	background-image: url('../../../assets/gui/btn_close-x2.png');
+	background-size: contain;
+	width: 50px;
+	height: 50px;
+	cursor: pointer;
+	position: relative;
+}
+
+.shopClose__btn__buy {
+	top: -160px;
+	right: -600px;
+}
+
+.shopClose__btn__sell {
+	top: -176px;
+	right: -491px;
 }
 
 .storeTreeList{
@@ -151,8 +196,49 @@
 
 /*Tree Tiles*/
 .treeTile{
-	border: solid black 2px;
+	display: flex;
+	flex-direction: column;
+	align-items: center;
 	padding: 5px;
+}
+
+.shopBuyButton {
+	background-image: url('../../../assets/gui/btn_buy-x2.png');
+}
+
+.shopSellButton {
+	background-image: url('../../../assets/gui/btn_Sell-x2.png');
+}
+
+.shopBuyButton, .shopSellButton {
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 150px;
+	height: 75px;
+	padding: 8px;
+	color: black;
+
+	display: flex;
+	flex-direction: row;
+	justify-content: center;
+	align-items: flex-end;
+}
+
+.shopButtonText, .coinIcon {
+	margin-bottom: 20px;
+}
+
+.shopButtonActionText {
+	font-weight: bold;
+}
+
+.coinIcon {
+	background-image: url('../../../assets/gui/icn_coin-x2.png');
+	background-size: contain;
+	background-repeat: no-repeat;
+	width: 30px;
+	height: 30px;
+	display: inline-block;
 }
 
 .treeListItem{
