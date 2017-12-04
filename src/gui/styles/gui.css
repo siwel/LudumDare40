@@ -91,6 +91,7 @@
 	bottom: 0;
 	height: 4vh;
 	font-size: 2.5vh;
+	display: flex;
 	background-color: none;
 }
 
