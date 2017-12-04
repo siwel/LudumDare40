@@ -29,7 +29,7 @@ export class TreeTile extends React.Component {
 
     shouldComponentUpdate(nextProps)
     {
-        if(nextProps.type.displayName === this.props.type.displayName)
+        if (nextProps.type.displayName === this.props.type.displayName && nextProps.updateHack === this.props.updateHack)
         {
             return false;
         }
@@ -38,9 +38,11 @@ export class TreeTile extends React.Component {
     }
 
     render() {
-        const {buyMode, tree, type} = this.props;
+        const {buyMode, slotNumber, tree, type} = this.props;
+        const sellValue = tree ? tree.getValue() : 69; // Should never use this if tree doesn't exist
+        console.log("Rendering TreeTile", sellValue);
 
-        const action = buyMode === true ? 'Plant' : 'Sell';
+        const action = buyMode === true ? 'BUY' : 'SELL';
         //const tree = type;
 
 
@@ -57,6 +59,10 @@ export class TreeTile extends React.Component {
         valueData[valueData.length - 1]['Age'] = type.maxAge;
 
         const onClick = buyMode === true ? this.onBuy : this.onSell;
+        const price = buyMode === true ? type.saplingPrice : sellValue;
+        const buttonClass = buyMode === true ? styles.shopBuyButton : styles.shopSellButton;
+
+        console.log("Sell value", sellValue, price);
 
         return (
             <div className={styles.treeTile}>
@@ -72,7 +78,14 @@ export class TreeTile extends React.Component {
                 </LineChart>
 
 
-                <div onClick={onClick}>{`${action} for $${type.saplingPrice}`}</div>
+                <div className={buttonClass} onClick={onClick}>
+                    <div className={styles.coinIcon}></div>
+                    <div className={styles.shopButtonText}>
+                        <span className={styles.shopButtonActionText}>{`${action}`}</span>
+                        <br />
+                        <span>{`$${price}`}</span>
+                    </div>
+                </div>
 
             </div>
         )

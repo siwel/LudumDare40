@@ -19,6 +19,7 @@ class Preloader extends Phaser.State {
     loadResources() {
 
         this.game.load.image('factory','image/factory.png');
+        this.game.load.image('smoke','image/smoke.png');
         this.game.load.image('background','image/blueBg.png');
 
         // Some trees

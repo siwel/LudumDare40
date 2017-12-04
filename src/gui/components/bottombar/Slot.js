@@ -23,7 +23,7 @@ export default class extends React.Component {
     _onPurchase(msg, data)
     {
         // debugger;
-        console.log(msg, data);
+        console.log("Slot on purchase", msg, data);
 
         if(data.getSlotNumber() === this.props.slotNumber)
         {
@@ -57,6 +57,6 @@ export default class extends React.Component {
         const {slotNumber} = this.props;
         const {tree} = this.state;
 
-        return this.state.occupied === true ? <TreeDetails tree={tree} slotNumber={slotNumber}/> : <Shop slotNumber={slotNumber}/>;
+        return this.state.occupied === true ? <TreeDetails tree={tree} slotNumber={slotNumber} /> : <Shop slotNumber={slotNumber}/>;
     }
 }

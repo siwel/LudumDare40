@@ -52,6 +52,7 @@ export default class Tree {
 
         this._age += this._changeRate;
         console.log("Tree Age: 11", this._age , this._changeRate);
+        
 
         this._currentAge = this._age *100/this._maxAge;
 
@@ -77,7 +78,6 @@ export default class Tree {
             this._o2 = this._o2OverTime[3];
             this._value = this._valueOverTime[3];
         }
-
 
         return this;
     }
@@ -118,6 +118,7 @@ export default class Tree {
 
     getValue()
     {
+        console.log("Getting value", this._value);
         return this._value;
     }
 
