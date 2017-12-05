@@ -1,6 +1,7 @@
 import PubSub from '../util/PubSubWrapper';
 import PubSubTopics from '../PubSubTopics';
 import Tree from './Tree';
+import swal from 'sweetalert2'
 
 const GAME_CONSTANTS = {
     maxC02: 100,
@@ -133,7 +134,11 @@ export default class GameStateManager {
 
         if((this.balance - data.tree.saplingPrice) < 0)
         {
-            alert('Not enough money for this sapling!');
+            swal({
+                title: 'Not enough money',
+                text: 'Try selling some trees/wood at the optimal tree age to raise some money',
+                confirmButtonText: 'Ok'
+            });
             return
         }
 
@@ -177,6 +182,11 @@ export default class GameStateManager {
         console.log(msg,data);
     }
 
+
+    getPopulation()
+    {
+        return this.population;
+    }
 
 
     subscribeToEvents() {

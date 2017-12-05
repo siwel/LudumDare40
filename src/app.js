@@ -1,5 +1,6 @@
 import {Game} from './Game';
 import {Gui} from './gui/Gui';
+import swal from 'sweetalert2'
 
 import GameStateManager from './managers/GameStateManager';
 import Ticker from './managers/Ticker';
@@ -8,48 +9,40 @@ import Ticker from './managers/Ticker';
 import PubSub from './util/PubSubWrapper';
 import PubSubTopics from './PubSubTopics';
 
+let id = null;
+swal({
+    title: 'Tree Master',
+    text: 'Carbon dioxide is filling up the world. More and more humans have polluted their planet and are suffocating.',
+    confirmButtonText: 'Next'
+}).then(() => {
+    swal({
+		title: 'You are the Tree Master',
+        text: 'Planter of trees and saver of lives. The populace will live and die by the quality of the air. Only you can prevent the humanity’s extinction.',
+        confirmButtonText: 'Start'
+    }).then(() => {
+		id = setInterval(() => {
+            ticker.tick(data);
+            PubSub.publish(PubSubTopics.TICK);
+        }, 1000);
+	})
+})
+
 const game = new Game(document.getElementById('game'));
-const gui = new Gui(document.getElementById('gui'), {
-    CO2Level: 10,
-    population: 50,
-    balance: 50,
-    title: 'Subtitle/Info',
-});
+
 
 PubSub.subscribe(PubSubTopics.BALANCE_UPDATE, (msg, balance) => {gui.update({balance});});
 
-// #gamejam
-// Can probably remove this with the below, but maybe not yet in case we need it as it took ages
-let treeLocationsMap = [];
-PubSub.subscribe(PubSubTopics.TREE_ADDED, (msg, data) => {
-	console.log(msg, data);
-	treeLocationsMap = data;
-});
 
-let mousedOverTree = null;
-document.body.addEventListener('mousemove', event => {
-	for (let tree of treeLocationsMap) {
-		if (
-			event.clientX > tree.xStart && event.clientX < tree.xEnd &&
-			event.clientY > tree.yStart && event.clientY < tree.yEnd
-		) {
-			mousedOverTree = tree.tree;
-		}
-		else {
-			mousedOverTree = null;
-		}
-	}
-});
-
-// TODO we can probably remove this now that slots exist
-document.getElementById('game').addEventListener('click', event => {
-	console.log("Click");
-	//if (mousedOverTree) {
-		gui.update({tree: mousedOverTree});
-	//}
-});
 
 const gameState = new GameStateManager();
+
+const gui = new Gui(document.getElementById('gui'), {
+    CO2Level: gameState.getCO2Level(),
+    population: gameState.getPopulation(),
+    balance: gameState.getBalance(),
+    title: 'Subtitle/Info',
+});
+
 let data = gameState.stateData;
 let time = 0;
 const ticker = new Ticker(gameState);
@@ -58,14 +51,10 @@ PubSub.subscribe(PubSubTopics.TICK, () => {
 	time++;
 	gui.update(Object.assign(gameState.stateData, {
 	 title: `Day: ${time}`,
-	 //tree: mousedOverTree, // uncomment for hover functionality for details popup
 	}));
 });
 
-let id = setInterval(() => {
-	ticker.tick(data);
-	PubSub.publish(PubSubTopics.TICK);
-}, 1000);
+
 
 PubSub.subscribe(PubSubTopics.GAME_END, ()=>
 {

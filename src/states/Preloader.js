@@ -36,7 +36,7 @@ class Preloader extends Phaser.State {
     }
 
     onLoadComplete() {
-        this.game.state.start('LoadingPage');
+        this.game.state.start('MainGame');
     }
 }
 

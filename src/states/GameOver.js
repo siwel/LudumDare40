@@ -25,12 +25,12 @@ export default class GameOver extends Phaser.State {
 
         this.gameOverText.setText("Game Over");
 
-        this.co2Level = this.add.text(this.game.world.centerX, 180, '', {
-            font: '25px Patua One', fill: '#ffff00', align: 'center'
-        });
-        this.co2Level.anchor.set(0.5,0);
-
-        this.co2Level.setText("CO2 Level: "+this._data.CO2Level);
+        // this.co2Level = this.add.text(this.game.world.centerX, 180, '', {
+        //     font: '25px Patua One', fill: '#ffff00', align: 'center'
+        // });
+        // this.co2Level.anchor.set(0.5,0);
+        //
+        // this.co2Level.setText("CO2 Level: "+this._data.CO2Level);
 
         this.people = this.add.text(this.game.world.centerX, 220, '', {
             font: '25px Patua One', fill: '#ffff00', align: 'center'

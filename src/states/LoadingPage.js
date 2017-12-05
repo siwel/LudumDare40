@@ -29,7 +29,7 @@ export default class LoadingPage extends Phaser.State {
         });
         this.title.anchor.set(0.5,0);
 
-        this.title.setText("Plant As Many Trees As You Can To Grow The Population.");
+        this.title.setText("Carbon dioxide is filling up the world. Humans have polluted their planet and are suffocating.");
 
 
         this.help = this.add.text(this.game.world.centerX, 280, '', {
