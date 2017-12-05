@@ -13,7 +13,7 @@ export default class GameStateManager {
         this.MAXCO2LEVEL = 100;
         this.trees = [];
         this.maxPopulation = 0;
-        this.population = 1;
+        this.population = 10;
         this.CO2Level = 0;
         this.CO2IncreasePerTick = 0;
         this.CO2DecreasePerTick = 1;
@@ -204,22 +204,31 @@ export default class GameStateManager {
     static get TREES() {
 
         return {
-            "LudumTree": {
-                displayName: "Ludum Tree",
-                assetName: "LudumTree",
-                maxAge: 50,
-                valueOverTime: [0, 150, 600, 20],
-                o2OverTime: [0, 300, 500, 0],
-                saplingPrice: 50,
+            "DareSun": {
+                displayName: "DareSun",
+                maxAge: 5,
+                assetName: "daresun",
+                valueOverTime: [0, 3, 10, 3],
+                o2OverTime: [2, 30, 50, 5],
+                saplingPrice: 15,
                 growthRate:1
             },
             "Jamboo": {
                 displayName: "Jamboo",
-                maxAge: 10,
+                maxAge: 30,
                 assetName: "Jamboo",
-                valueOverTime: [0, 80, 60, 10],
-                o2OverTime: [7, 33, 48, 0],
-                saplingPrice: 10,
+                valueOverTime: [10, 15, 40, 10],
+                o2OverTime: [15, 30, 30, 20],
+                saplingPrice: 35,
+                growthRate:1
+            },
+            "LudumTree": {
+                displayName: "Ludum Tree",
+                assetName: "LudumTree",
+                maxAge: 100,
+                valueOverTime: [0, 0, 10, 250, 20],
+                o2OverTime: [30, 50, 100, 120, 60],
+                saplingPrice: 75,
                 growthRate:1
             },
         }
